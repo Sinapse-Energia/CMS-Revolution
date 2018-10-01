@@ -52,10 +52,27 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+  # config.cache_classes = false
+  # config.assets.debug = true
+  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  # config.action_mailer.raise_delivery_errors = true
+  # config.action_mailer.perform_deliveries = true
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.default charset: "utf-8"
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+  :user_name => '82a6d90e4c2277',
+  :password => '7a192c2dbd2203',
+  :address => 'smtp.mailtrap.io',
+  :domain => 'smtp.mailtrap.io',
+  :port => '2525',
+  :authentication => :cram_md5
+}
 end

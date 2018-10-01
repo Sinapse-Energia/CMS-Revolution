@@ -12,8 +12,9 @@ class SessionController < ApplicationController
       render :json => { status: true, notice: 'login successful' }
     else
       flash[:error]= "Email or password is invalid"
-      redirect_to login_path
+      # redirect_to root_path
       puts "Fail"
+      render :json => { status: true, notice: 'login successful' }
     end     
   end
 
@@ -42,6 +43,7 @@ class SessionController < ApplicationController
       if @user.save
         session[:user_id] = @user.id
         cookies[:token] = @user.token
+        UserMailer.welcome_user(@user)
         # puts "Hello"
         redirect_to dash_path
       else
@@ -51,10 +53,36 @@ class SessionController < ApplicationController
     end
   end
 
+  def forget_password
+  end
+  
+  def reset_password
+       @user = User.find_by(email: params[:email])
+       if @user.present?
+         ap @url  = "http://localhost:3000/session/change_password_view?id=#{@user.id}"
+          UserMailer.reset_password_email(@user, @url).deliver_now
+       else
+       flash[:notice] = "Email does not Exists. Please provide valid email"
+       end 
+  end
+
+  def change_password_view
+  end
+
+  def change_password
+       @user = User.find_by(id: params[:id])
+       if @user
+          @user.update_attributes!(password: params[:password])
+          redirect_to root_path
+       else
+         flash[:notice] = "No user exists"
+       end
+  end
+
   def logout
     session[:user_id] = nil
     cookies[:token] = nil
-    redirect_to login_path
+    redirect_to root_path
   end
   private
   def user_params
