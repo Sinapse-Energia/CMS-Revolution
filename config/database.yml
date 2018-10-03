@@ -19,5 +19,5 @@ test:
 production:
   <<: *default
   database: cms_device_app_production
-  username: cms_device_app
-  password: <%= ENV['CMS_DEVICE_APP_DATABASE_PASSWORD'] %>
+  username: jlaqqupvitpeoz
+  password: b1967c8317f05f10ec8e7b3d4753c7823da386cfbc39970914c9f6e334cad02a
