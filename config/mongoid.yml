@@ -162,3 +162,11 @@ test:
         read:
           mode: :primary
         max_pool_size: 1
+
+production:
+    clients:
+        default:
+            uri:  mongodb://heroku_9t7cmgtl:h9drrqibo9knn520brb4qtkh3b@ds121203.mlab.com:21203/heroku_9t7cmgtl
+        options:
+            skip_version_check: true
+        safe: true
