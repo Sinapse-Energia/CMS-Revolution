@@ -7,7 +7,6 @@ set :deploy_to, '/var/www/cms_revolution'
 set :use_sudo, true
 set :branch, 'master' 
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
-set :deploy_to, '/home/deploy/cms-revolution'
 
 set :pty, true
 
@@ -22,26 +21,26 @@ set :rvm_type, :user
 set :rvm_ruby_version, 'ruby-2.5.1' # Should match ruby version
 
 
-namespace :deploy do
-  # make sure we're deploying what we think we're deploying
-  before :deploy, "deploy:check_revision"
-  # only allow a deploy with passing tests to deployed
-  # compile assets locally then rsync
-  after 'deploy:symlink:shared', 'deploy:compile_assets_locally'
-  after :finishing, 'deploy:cleanup'
+# namespace :deploy do
+#   # make sure we're deploying what we think we're deploying
+#   before :deploy, "deploy:check_revision"
+#   # only allow a deploy with passing tests to deployed
+#   # compile assets locally then rsync
+#   after 'deploy:symlink:shared', 'deploy:compile_assets_locally'
+#   after :finishing, 'deploy:cleanup'
 
-  # remove the default nginx configuration as it will tend
-  # to conflict with our configs.
-  before 'deploy:setup_config', 'nginx:remove_default_vhost'
+#   # remove the default nginx configuration as it will tend
+#   # to conflict with our configs.
+#   # before 'deploy:setup_config', 'nginx:remove_default_vhost'
 
-  # reload nginx to it will pick up any modified vhosts from
-  # setup_config
-  after 'deploy:setup_config', 'nginx:reload'
+#   # reload nginx to it will pick up any modified vhosts from
+#   # setup_config
+#   # after 'deploy:setup_config', 'nginx:reload'
 
-  # Restart monit so it will pick up any monit configurations
-  # we've added
+#   # Restart monit so it will pick up any monit configurations
+#   # we've added
 
-  # As of Capistrano 3.1, the `deploy:restart` task is not called
-  # automatically.
-  after 'deploy:publishing', 'deploy:restart'
-end
+#   # As of Capistrano 3.1, the `deploy:restart` task is not called
+#   # automatically.
+#   after 'deploy:publishing', 'deploy:restart'
+# end
