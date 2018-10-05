@@ -50,13 +50,16 @@ end
   end
   
   def reset_password
-       @user = User.find_by(email: params[:email])
-       if @user.present?
-         ap @url  = "http://localhost:3000/session/change_password_view?id=#{@user.id}"
-          UserMailer.reset_password_email(@user, @url).deliver_now
-       else
-       flash[:notice] = "Email does not Exists. Please provide valid email"
-       end 
+      @user = User.find_by(email: params[:email])
+      if @user.present?
+        @url  = "http://localhost:3000/session/change_password_view?id=#{@user.id}"
+        UserMailer.reset_password_email(@user, @url).deliver_now
+        flash[:notice] = " An email has been sent to reset your password "
+        redirect_to root_path
+      else
+        flash[:notice] = "Email does not Exists. Please provide valid email"
+       end
+
   end
 
   def change_password_view
