@@ -11,4 +11,5 @@ Rails.application.routes.draw do
     get 'change_password_view', to: 'session#change_password_view', on: :collection
     post 'change_password', to: 'session#change_password', on: :collection
   end
+  get '/logout', to: "session#logout"
 end
