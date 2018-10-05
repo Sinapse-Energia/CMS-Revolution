@@ -1,5 +1,5 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.10.1"
+# lock "~> 3.10.1"
 
 set :application, "cms_revolution"
 set :repo_url, "git@github.com:Sinapse-Energia/CMS-Revolution.git"
@@ -9,7 +9,7 @@ ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 set :deploy_to, '/var/www/cms_revolution'
 # set :deploy_to, -> { "#{fetch(:application)}" }
 set :user,            'deploy'
-set :use_sudo, true
+set :use_sudo, false
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
 

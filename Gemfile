@@ -66,3 +66,13 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'awesome_print', '~> 1.8'
+
+group :development do
+  gem 'capistrano', require: false
+  gem 'capistrano-rvm',     require: false
+  gem 'capistrano-rails',   require: false
+  gem 'capistrano-bundler', require: false
+  #gem 'capistrano-passenger', require: false  
+  gem 'capistrano3-puma', require: false
+  gem 'capistrano-sidekiq', require: false  
+end
