@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
-  validates_uniqueness_of :email, :phone
+  validates_uniqueness_of :email
   before_create :generate_access_token
   has_many :urls
   private

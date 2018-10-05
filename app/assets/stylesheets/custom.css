@@ -1,0 +1,51 @@
+
+.status-center{
+  text-align: center;
+  padding: 5%;
+}
+.device-image {
+  border-bottom: none !important;
+  position: relative;
+  left: 36%;
+}
+.device-submit {
+  position: relative;
+  top: 20px;
+}
+.device-display-image {
+  height: 187px;
+  width: 100%;
+}
+
+.device-alert-message {
+  background-color: #6ebf5d;
+  border-color: #6ebf5d;
+  color: #ffffff;
+  font-family: 'helvetica_neue_lt_std65Md';
+  text-align: center;
+}
+
+#management .status-area .pad-left-10{
+  padding-left: 20px;
+}
+.text-in  .panner-in .lineone{
+  float: left;
+  width: 100%;
+}
+.text-in  .panner-in .lineone .key-text{
+  float: left;
+}
+.discription-container .text-in .panner-in .lineone .pad-left-10{
+  padding-left: 20px;
+}
+.template-image {
+  padding-top: 20px;
+}
+.display-image{
+  position: relative;
+  left: 25%;
+  top: -43px;
+  height: 50px;
+  width: 50px;
+  border-color: #6ebf5d;
+}
