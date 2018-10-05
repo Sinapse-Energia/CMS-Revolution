@@ -17,7 +17,8 @@
             </ul>
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="signin">
-                 <form class="form-horizontal" id="new_user" action="/users/sign_in" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="kSccnj6Cp9zG4whBOt2SCMwQ9Fs2mYCay/QnB/4rIbNlVj8xaOc4fwLaVKr9GjNmHYFNdOQazBAtEy9sbvziUQ==">
+                 <form class="form-horizontal" id="new_user" accept-charset="UTF-8" method="post" action="/session/create">
+                  <input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="kSccnj6Cp9zG4whBOt2SCMwQ9Fs2mYCay/QnB/4rIbNlVj8xaOc4fwLaVKr9GjNmHYFNdOQazBAtEy9sbvziUQ==">
                       <!-- <div id="flash_alert">You need to sign in or sign up before continuing.</div> -->
                     <div class="form-group">
                       <div class="col-xs-12">
@@ -39,10 +40,11 @@
                     </div>
                     <div class="form-group">
                       <div class="col-xs-12">
-                        <button name="button" type="submit" class="btn btn-default login-btn">Sign in</button>
+                        <button name="button" class="btn btn-default login-btn", onclick="return create_session();">Sign in</button>
                       </div>
                     </div>
                   </form> 
+              
                 </div>
               </div>
             </div> 
@@ -53,3 +55,4 @@
 </div>
 </body>
 </html>
+
