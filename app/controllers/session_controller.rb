@@ -10,12 +10,9 @@ end
     if user && user.authenticate(params[:user][:password])
       session[:user_id] = user.id
       cookies[:token] = user.token
-      puts user.id
-      puts user.token
-      render :json => { status: true, notice: 'login successful' }
+      render ('create_session')
     else
       flash[:error]= "Email or password is invalid"
-      puts "Fail"
       redirect_to root_path
     end     
   end
@@ -37,11 +34,10 @@ end
         session[:user_id] = @user.id
         cookies[:token] = @user.token
         UserMailer.welcome_user(@user)
-        # puts "Hello"
-         render :json => { status: true, notice: 'Sign up successfully' }
+        flash[:notice] = "Sign up successfully"
+         render ('index')
       else
-        flash[:notice] = "email and password are incorrect"
-        redirect_to root_path
+        redirect_to root_path, notice: "email or password incorrect"
       end
     end
   end
