@@ -15,7 +15,6 @@
  */
  
  html, body {
-     /*min-height: inherit; */
      height: 100%; 
 }
 body {
@@ -43,15 +42,9 @@ body {
 }
 .login-container .left-section {
     display: table-cell;
-    width: 50%;
-    height: 100%;
     background-image: url(../assets/login-bg.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-}
-.login-container input.form-control {
-     /*border: 0; */
-    /* border-radius: 0; */
 }
 .login-container .form-section .nav-tabs {
      width: 100%; 
@@ -208,9 +201,9 @@ input.form-control {
     background-position: 8px center;
 }
 
-@media (max-width: 767px)
-.login-container .left-section {
+@media (max-width: 767px){
+.login-container .right-section {
     width: 100%;
     float: left;
-    /* padding: 5px 15px 0px 15px; */
-}
+    padding: 5px 15px 0px 15px;
+}}
