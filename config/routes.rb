@@ -12,4 +12,13 @@ Rails.application.routes.draw do
     post 'change_password', to: 'session#change_password', on: :collection
   end
   get '/logout', to: "session#logout"
+
+  resources :devices do
+    member do
+      get :get_device
+      get :get_messages
+      post :connect
+      post :disconnect
+    end
+  end
 end

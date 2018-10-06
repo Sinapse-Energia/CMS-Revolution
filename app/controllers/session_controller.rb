@@ -10,7 +10,8 @@ end
     if user && user.authenticate(params[:user][:password])
       session[:user_id] = user.id
       cookies[:token] = user.token
-      render ('create_session')
+      # render ('create_session')
+      redirect_to devices_path
     else
       flash[:error]= "Email or password is invalid"
       redirect_to root_path
