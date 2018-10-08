@@ -16,7 +16,7 @@
               </div>
               <div class="col-xs-12">
                 <div class="custom-dropdown dm">
-                  <%= f.select(:template_id, options_for_select(@templates, :selected => f.object.template_id), {prompt: 'Select Template'}, {class: "form-control", required: true}) %>
+                <!--   <%= f.select(:template_id, options_for_select(@templates, :selected => f.object.template_id), {prompt: 'Select Template'}, {class: "form-control", required: true}) %> -->
                 </div>
               </div>
             </div>
@@ -39,7 +39,6 @@
                       </div>
                     </div>
                   </div>
-                  <%= image_tag(f.object.image, class: 'display-image', id: 'displayImage') if device.persisted? %>
                 </div>
               </div>
             </div>

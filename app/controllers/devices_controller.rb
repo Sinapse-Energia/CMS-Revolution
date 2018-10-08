@@ -14,12 +14,12 @@ class DevicesController < ApplicationController
   end
 
   def create
-    @device = Device.new(device_params)
+     @device = Device.new(device_params)
     if @device.save
-      @device.create_mqtt_broker
+      # @device.create_mqtt_broker
       redirect_to :devices
     else
-      redirect_back
+      redirect_to new_device_path
     end
   end
 
@@ -29,7 +29,7 @@ class DevicesController < ApplicationController
   end
 
   def update
-    if params[:device][:api_json].present?
+      if params[:device][:api_json].present?
       # For device management when upload json
       file = params[:device][:api_json].read
       data = JSON.parse(file)
@@ -38,7 +38,7 @@ class DevicesController < ApplicationController
       # Normal device updation
       @device.update(device_params)
     end
-    redirect_to root_path
+    redirect_to new_device_path
   end
 
   # MQTT device connect operations
@@ -144,11 +144,11 @@ class DevicesController < ApplicationController
     @device = Device.find_by(id: @devices.first.last) rescue nil
     # @templates = Template.all.map{|t| [t.name, t.id] }
     @message = "Test message published at #{Time.now.strftime('%d-%m-%Y %H:%M:%S')}"
-    if !@device.nil?
-    	@topic = @device.topic
-    else
-        @topic = "DEFAULT_TOPIC"
-    end
+    # if !@device.nil?
+    # 	@topic = @device.topic
+    # else
+    #     @topic = "DEFAULT_TOPIC"
+    # end
   end
 
   def connect_mqtt_client
