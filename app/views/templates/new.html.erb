@@ -1,0 +1,53 @@
+<div class="top-panel">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <div class="page-title">Template Management</div>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <div class="page-breadcrumbs">
+          <ul>
+            <li><a href="#">Devices</a></li>
+            <li>IOT Hub Scinap</li>
+          </ul>
+       </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="middle-container">
+  <div class="container-fluid">
+    <div class="row">
+      <%= render partial: 'templates/template_form', locals: {template: @template} %>
+      <div class="col-xs-12 col-sm-12">
+        <div class="panel-box">
+          <div class="panel-head">
+            <h2>Tempates</h2>
+          </div>
+          <div class="device-detail-table roundscroll">
+            <div class="table-responsive">
+              <table class="table table-striped fixed_headers two-column">
+                <thead>
+                  <tr>
+                    <th>Tempate Name</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody style="height:175px;">
+                  <% @templates.each do |t| %>
+                    <tr>
+                      <td><%= t.name %></td>
+                      <td><%= link_to image_tag('edit-icon.svg'), edit_template_path(id: t.id) %></td>
+                      <!--<td><a href><img src="../assets/edit-icon.svg" alt="edit"></a></td>-->
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="clear"></div>

@@ -21,4 +21,11 @@ Rails.application.routes.draw do
       post :disconnect
     end
   end
+  resources :templates do
+    member do
+      get :get_template
+    end
+  end
+  get 'terms', to: 'static_pages#terms'
+  get 'help', to: 'static_pages#help'
 end

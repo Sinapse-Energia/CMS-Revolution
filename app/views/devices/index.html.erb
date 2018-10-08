@@ -7,35 +7,33 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/"><img alt="logo" src="/assets/inner-logo-880c6413d3f20851c5842073bfc3a85a549462d9c39771dc4122d3eaf1376947.svg"></a>
+            <a class="navbar-brand" href="/devices"><img alt="logo" src="/assets/inner-logo-880c6413d3f20851c5842073bfc3a85a549462d9c39771dc4122d3eaf1376947.svg"></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-
-
-            <ul class="nav navbar-nav navbar-left navbar-top-links">
+           <ul class="nav navbar-nav navbar-left navbar-top-links">
                 <li class="active">
-                  <a href="/">
+                  <a href="/devices">
                     <i class="device-icon"></i>
                     Devices
-</a>                </li>
-
+                  </a> 
+                </li>
                 <li class="">
                   <a href="/templates">
                     <i class="template-icon"></i>
                     Templates
-</a>                </li>
-
+                  </a>
+                </li>
                 <li class="">
                   <a href="/help">
                     <i class="help-icon"></i>
                     Help
-</a>                </li>
+                  </a>
+                </li>
             </ul>
 
 
             <!-- /.navbar-top-links -->
         </div>
-
         <ul class="nav navbar-right navbar-top-links">
             <li class="userdp dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -61,10 +59,83 @@
                         <a rel="nofollow" href="/session/index">
                         <i class="fa fa-sign-out fa-fw"></i>
                         Logout
-</a>                </li>
-            </ul>
-        </li>
-    </ul>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
 </div>
-
 </nav>
+<div class="main-wrapper">
+            <div class="alert-success device-alert-message"></div>
+<div class="top-panel" id="device-index">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <div class="page-title">Devices</div>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <div class="page-breadcrumbs">
+          <ul>
+            <li>
+              <a href="#">Devices</a>
+            </li>
+            <li>IOT Hub Scinap</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="middle-container">
+  <div class="tab-section page-tab">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active js-device-li">
+                <a aria-controls="globalview" role="tab" data-toggle="tab" class="js-device-tab" href="#globalview">Global View</a>
+              </li>
+              <li role="presentation" class=" js-device-li">
+                <a aria-controls="mqttclient" role="tab" data-toggle="tab" class="js-device-tab" href="#mqttclient">MQTT Client</a>
+              </li>
+              <li role="presentation" class=" js-device-li">
+                <a aria-controls="management" role="tab" data-toggle="tab" class="js-device-tab" href="#management">Management</a>
+              </li>
+          </ul>
+          <div class="col-xs-12">
+            <div class="tabing-select">
+              <div class="custom-dropdown select whtab">
+                <div class="ddOutOfVision" id="select_device_msddHolder" style="height: 0px; overflow: hidden; position: absolute;"><select name="select device" id="select_device" class="form-control csdropdown" onchange="selected_device($(this))" tabindex="-1"><option selected="selected" value="0">Create New Device</option></select></div><div class="dd ddcommon borderRadius" id="select_device_msdd" tabindex="0" style="width: 198px;"><div class="ddTitle borderRadiusTp"><span class="divider"></span><span class="ddArrow arrowoff"></span><span class="ddTitleText " id="select_device_title"><span class="ddlabel">Create New Device</span><span class="description" style="display: none;"></span></span></div><input id="select_device_titleText" type="text" autocomplete="off" class="text shadow borderRadius" style="display: none;"><div class="ddChild ddchild_ border shadow" id="select_device_child" style="z-index: 9999; display: none; position: absolute; visibility: visible; height: 36px;"><ul><li class="enabled _msddli_ selected"><span class="ddlabel">Create New Device</span><div class="clear"></div></li></ul></div></div>
+              </div>
+            </div>
+          </div>
+          <!-- Tab panes -->
+          <div class="tab-content" id="deviceTabs">
+            <div role="tabpanel" class="tab-pane active" id="globalview">
+  
+</div>
+<div role="tabpanel" class="tab-pane" id="mqttclient">
+  
+</div>
+<div role="tabpanel" class="tab-pane" id="management">
+  
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="clear"></div>
+
+<script type="text/jscript">
+function connect_mqtt() {
+$('#conn_type').val('connect');
+$('#mqtt_frm').submit();
+}
+</script>
+
+            <div class="clear"></div>
+        </div>

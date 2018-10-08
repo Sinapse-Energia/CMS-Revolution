@@ -1,0 +1,57 @@
+<div class="panel-box">
+  <div class="panel-head">
+    <% if device.persisted? %>
+        <h2>Update Device</h2>
+    <% else %>
+        <h2>Create Device</h2>
+    <% end %>
+  </div>
+  <div class="dc-management-form">
+    <%= form_for(device, html: {class: 'form-horizontal', multipart: true}) do |f| %>
+        <div class="form-group">
+          <div class="col-xs-12 col-sm-6 mb-xs-15">
+            <div class="row">
+              <div class="col-xs-12 mb-15">
+                <%= f.text_field :name, class: 'form-control', placeholder: 'Device Name Here', required: true %>
+              </div>
+              <div class="col-xs-12">
+                <div class="custom-dropdown dm">
+                  <%= f.select(:template_id, options_for_select(@templates, :selected => f.object.template_id), {prompt: 'Select Template'}, {class: "form-control", required: true}) %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 mb-xs-15">
+            <div class="row">
+              <div class="col-xs-12 mb-15">
+                <%= f.text_field :interfaces_peripherals, class: 'form-control roundscroll', placeholder: "Interfaces and Peripherals", required: true %>
+              </div>
+              <div class="col-xs-12">
+                <div class="file-upload">
+                  <div class="file-select">
+                    <div class="file-select-name  device-image">Upload Device Image</div>
+                    <%= f.file_field :image %>
+                    <div class="imageupload device-image">
+                      <div class="file-tab panel-body">
+                        <label class="btn btn-default btn-file">
+                          <span>Browse</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <%= image_tag(f.object.image, class: 'display-image', id: 'displayImage') if device.persisted? %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+
+            <div class="col-xs-12 text-center">
+              <%= f.hidden_field :user_id, value: session[:user_id] %>
+              <button type="submit" class="btn submit-btn-green device-submit">Submit</button>
+            </div>
+          </div>
+    <% end %>
+    </div>
+  </div>
+</div>

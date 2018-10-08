@@ -1,0 +1,123 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/"><img alt="logo" src="/assets/inner-logo-880c6413d3f20851c5842073bfc3a85a549462d9c39771dc4122d3eaf1376947.svg"></a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+           <ul class="nav navbar-nav navbar-left navbar-top-links">
+                <li class="">
+                  <a href="/devices">
+                    <i class="device-icon"></i>
+                    Devices
+                  </a> 
+                </li>
+                <li class="active">
+                  <a href="/templates">
+                    <i class="template-icon"></i>
+                    Templates
+                  </a>
+                </li>
+                <li class="">
+                  <a href="/help">
+                    <i class="help-icon"></i>
+                    Help
+                  </a>
+                </li>
+            </ul>
+
+
+            <!-- /.navbar-top-links -->
+        </div>
+        <ul class="nav navbar-right navbar-top-links">
+            <li class="userdp dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <span class="user-profile">
+                      <img src="/assets/missing_user.png" alt="Missing user">
+                    </span>
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li>
+
+                        <a href="/users/edit">
+                          <i class="fa fa-user fa-fw"></i>
+                          User Profile</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-gear fa-fw"></i>
+                            Settings</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a rel="nofollow" href="/session/index">
+                        <i class="fa fa-sign-out fa-fw"></i>
+                        Logout
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+</div>
+</nav>
+<div class="main-wrapper">
+            <div class="alert-success device-alert-message"></div>
+<div class="top-panel">
+   <div class="container-fluid">
+      <div class="row">
+          <div class="col-xs-12 col-sm-6">
+              <div class="page-title">Templates</div>
+          </div>
+          <div class="col-xs-12 col-sm-6">
+              <div class="page-breadcrumbs">
+                 <ul>
+                    <li><a href="#">Templates</a></li>
+                 </ul>
+              </div>
+          </div>
+      </div>
+   </div>
+</div>
+<div class="middle-container">
+  <div class="tab-section">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="custom-dropdown select whtab">
+            <div class="ddOutOfVision" id="Select_Template_msddHolder" style="height: 0px; overflow: hidden; position: absolute;"><select name="Select Template" id="Select_Template" class="form-control csdropdown" onchange="selected_template($(this))" tabindex="-1"><option selected="selected" value="0">Create New Template</option></select></div><div class="dd ddcommon borderRadius" id="Select_Template_msdd" tabindex="0" style="width: 198px;"><div class="ddTitle borderRadiusTp"><span class="divider"></span><span class="ddArrow arrowoff"></span><span class="ddTitleText " id="Select_Template_title"><span class="ddlabel">Create New Template</span><span class="description" style="display: none;"></span></span></div><input id="Select_Template_titleText" type="text" autocomplete="off" class="text shadow borderRadius" style="display: none;"><div class="ddChild ddchild_ border shadow" id="Select_Template_child" style="z-index: 9999; display: none; position: absolute; visibility: visible; height: 36px;"><ul><li class="enabled _msddli_ selected"><span class="ddlabel">Create New Template</span><div class="clear"></div></li></ul></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="template-index">
+    <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="buttonpnnl">
+        <button class="button-create device" onclick="window.location='devices/new';">create device</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</div>
+
+<script type="text/jscript">
+function connect_mqtt() {
+$('#conn_type').val('connect');
+$('#mqtt_frm').submit();
+}
+</script>
+
+            <div class="clear"></div>
+        </div>
+
+

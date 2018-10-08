@@ -1,0 +1,17 @@
+<div class="text-in ">
+  <div class="panner-in ">
+    <% is_hash = hardware_json[1].is_a?(Hash) %>
+    <div class="lineone">
+      <div class="key-text">
+        <p><%= hardware_json[0] %> : </p>
+      </div>
+      <div class="<%= is_hash ? 'pad-left-10' : 'key-text' %>">
+        <% if is_hash %>
+          <%= render partial: 'templates/show_hardware_data', collection: hardware_json[1], as: :hardware_json %>
+        <% else %>
+          <p>&nbsp;<%= hardware_json[1] %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

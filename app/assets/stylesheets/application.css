@@ -207,3 +207,38 @@ input.form-control {
     float: left;
     padding: 5px 15px 0px 15px;
 }}
+
+
+
+/*template views design*/
+
+button.button-create.device {
+    float: right;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #6ebf5d;
+    border-radius: 50px;
+    border: none;
+    display: table;
+    font-size: 15px;
+    font-family: 'helvetica_neue_lt_std65Md';
+    background-image: url(../assets/button-add.png);
+    background-repeat: no-repeat;
+    background-position: 15px center;
+    padding: 8px 20px 6px 35px;
+}
+.help-content .paragrapg p {
+    font-size: 13px;
+    color: #000000;
+    font-family: 'helvetica_neue_lt_std55_roman';
+    line-height: 25px;
+    margin-bottom: 0;
+}
+p {
+    margin: 0 0 10px;
+}
+.help-content .paragrapg {
+    float: left;
+    width: 100%;
+    padding-bottom: 40px;
+}

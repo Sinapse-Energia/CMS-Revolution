@@ -1,0 +1,48 @@
+<div class="container-fluid">
+  <div class="row">
+  <% if !template.nil? %>   
+  <div class="col-xs-12 col-sm-6 p-r-10">
+      <div class="panel-box my-panel fix-box">
+        <div class="panel-head">
+          <h2><%= template.name %></h2>
+        </div>
+        <div class="panner-in p-one">
+          <div class="text-center">
+            <%= image_tag(template.image, class: 'device-display-image')%>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 p-l-10">
+      <div class="panel-box my-panel fix-box">
+        <div class="panel-head">
+          <h2>Overview</h2>
+        </div>
+        <div class="overview-container roundscroll">
+          <div class="panner-in p-two ">
+            <h3><%= template.hardware_json.dig('CommBoard', 'Name') %></h3>
+            <p><%= template.hardware_json.dig('CommBoard', 'Description') %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="panel-box p-three ">
+        <div class="panel-head">
+          <h2>Description</h2>
+        </div>
+        <% if template.hardware_json.present? %>
+          <div class="discription-container roundscroll">
+            <%= render partial: 'templates/show_hardware_data', collection: template.hardware_json, as: :hardware_json %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="buttonpnnl">
+        <button class="button-create device" onclick="window.location='devices/new';">create device</button>
+      </div>
+    </div>
+  </div>
+</div>
