@@ -28,7 +28,8 @@ end
       redirect_to register_session_index_path
     else 
       @user = User.new
-      @user.name = user_params[:first_name]
+      @user.first_name = user_params[:first_name]
+      @user.last_name = user_params[:last_name]
       @user.email = user_params[:email]
       @user.password = user_params[:password]
       if @user.save
