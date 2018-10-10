@@ -29,6 +29,11 @@ class DevicesController < ApplicationController
     @device.update(device_params)
     redirect_to devices_path
   end
+  
+  def destroy
+    @device = Device.find_by(id: params[:id])
+    @device.destroy
+  end
  
  private
 
