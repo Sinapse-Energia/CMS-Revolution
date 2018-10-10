@@ -78,9 +78,12 @@
                         <td><%= device.id_communication %></td>
                         <td><%= device.date_installation %></td>
                         <td><%= link_to image_tag('edit-icon.svg'), edit_device_path(id: device.id) %>
-                        <!--   <%= link_to image_tag('delete-icon.svg'), device_path(device.id), :method => :delete %>
-                            --> 
-                          </td>
+                         <%= link_to image_tag('delete-icon.svg'), device_path(device.id), :method => :delete , data: { confirm: 'Are you sure?'} %> 
+                         
+                           <!-- <a data-target="#delete_action_Modal" data-toggle="modal" >
+                             <i class="fa fa-trash"></i>
+                            </a> -->
+                        </td>
                       </tr>
                     <% end %>
                   </tbody>
@@ -105,3 +108,19 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="delete_action_Modal" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Are you sure?</h4>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" name="custId" value=id>
+        <%= link_to image_tag('delete-icon.svg'), new_device_path %>
+      </div>
+    </div>
+  </div>
+</div>
+
