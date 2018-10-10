@@ -207,7 +207,14 @@ input.form-control {
     float: left;
     padding: 5px 15px 0px 15px;
 }}
-
+@media (max-width: 767px){
+.navbar-inverse .navbar-right {
+    margin-right: 0;
+    position: fixed;
+    top: 0;
+    right: 6px;
+}
+}
 
 
 /*template views design*/
