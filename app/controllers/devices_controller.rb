@@ -24,6 +24,9 @@ class DevicesController < ApplicationController
 
   def edit
     @devices = Device.all
+    respond_to do |format|               
+       format.js
+    end
   end
 
   def update
