@@ -280,7 +280,10 @@ ol, ul {
 .btn-link{
         font-size: 18px;
 }
-.fa {
+.fa-trash {
     font-size: 20px;
     color:red;
+}
+.white{
+    background-color: white;
 }
