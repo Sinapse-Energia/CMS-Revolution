@@ -1,0 +1,59 @@
+
+<div class="middle-container">
+  <% if @devices.present? %>
+    <div class="col-xs-12 col-sm-12">
+            <div class="panel-box">
+              <div class="panel-head">
+                <h2>Devices</h2>
+              </div>
+              <div class="device-detail-table">
+                <div class="table-responsive">
+                  <table class="table table-striped ">
+                    <thead>
+                      <tr>
+                        <th>Device Name</th>
+                        <th>Device Id Code</th>
+                        <th>Device Id Communication</th>
+                        <th>Device Date Installation</th>
+                      </tr>
+                    </thead>
+                    <tbody style="height:100px;">
+                      <% @devices.each do |device| %>
+                        <tr>
+                          <td><%= device.name %></td>
+                          <td><%= device.id_code %></td>
+                          <td><%= device.id_communication %></td>
+                          <td><%= device.date_installation %></td>
+                          <td><%= link_to image_tag('edit-icon.svg'), edit_device_path(id: device.id) %>
+                             <%= link_to image_tag('delete-icon.svg'), device_path(device.id), :method => :delete , data: { confirm: 'Are you sure?'} %> 
+                            
+                             <!-- <a data-target="#delete_action_Modal" data-toggle="modal" >
+                               <i class="fa fa-trash"></i>
+                              </a> -->
+                          </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <%= button_to 'Create a Device', create_device_path, method: :get, remote: true,  class: "btn btn-success btn-right" %>
+          </div>
+    </div>
+    <% else %>
+      <div class="col-xs-12 col-sm-12">
+        <div class="panel-box">
+          <div class="row">
+            <div class="col-sm-12"></div>
+            <div class="col-sm-12"></div>
+            <div class="col-sm-12">
+              <%= button_to 'Create a Device', new_device_path, method: :get, class: "btn btn-success btn-right" %>
+            </div>
+          </div>
+        </div>
+      </div>      
+  
+    <% end %> 
+
+  </div>

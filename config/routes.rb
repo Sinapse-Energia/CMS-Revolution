@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     post 'change_password', to: 'session#change_password', on: :collection
   end
   get '/logout', to: "session#logout"
+  get '/device_mqtt', to: "devices#device_mqtt"
+  get '/create_device', to: "devices#create_device"
+  get '/get_device', to: "devices#get_device" 
 
   resources :devices do
     member do

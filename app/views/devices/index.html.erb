@@ -43,15 +43,25 @@
         <div class="row">
           <div class="col-xs-12 col-sm-12">
             <ul class="nav nav-tabs" role="tablist">
-                <button type="button" class="btn btn-link btn-md" data-toggle="modal" data-target="#myModal">Managment</button>
-                <button type="button" class="btn btn-link btn-md" data-toggle="modal" data-target="#m">MQTT Client</button>
-            </ul>
+              <li role="presentation" class="js-device-li active">
+                <a aria-controls="globalview" role="tab" data-toggle="tab" class="js-device-tab" href="#globalview" aria-expanded="false">Actuators</a>
+              </li>
+              <li role="presentation" class="js-device-li  ">
+                <a aria-controls="mqttclient" role="tab" data-toggle="tab" class="js-device-tab" href="#mqttclient" aria-expanded="true">Monitor</a>
+              </li>
+             <%= link_to "Management", device_mqtt_path, :remote => true %>
+          </ul>
+            <!-- <ul class="nav nav-tabs" role="tablist">
+                <button type="button" class="btn btn-link btn-md" data-toggle="modal" data-target="#myModal">Actuators</button>
+                <button type="button" class="btn btn-link btn-md" data-toggle="modal" data-target="#m">Monitor</button>
+                <button type="button" class="btn btn-link btn-md" data-toggle="modal" data-target="#m">Management</button>
+            </ul> -->
          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="middle-container">
+<!--   <div class="middle-container">
   <% if @devices.present? %>
     <div class="col-xs-12 col-sm-12">
             <div class="panel-box">
@@ -82,7 +92,7 @@
                              <!-- <a data-target="#delete_action_Modal" data-toggle="modal" >
                                <i class="fa fa-trash"></i>
                               </a> -->
-                          </td>
+                         <!--  </td>
                         </tr>
                       <% end %>
                     </tbody>
@@ -92,7 +102,8 @@
             </div>
           </div>
     </div>
-  <% end %>
+  <% end %> -->
+   <div id="div_id"></div>
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
