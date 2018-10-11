@@ -29,14 +29,13 @@ end
     else 
       @user = User.new
       @user.first_name = user_params[:first_name]
-      @user.last_name = user_params[:last_name]
       @user.email = user_params[:email]
       @user.password = user_params[:password]
       if @user.save
         session[:user_id] = @user.id
         cookies[:token] = @user.token
         UserMailer.welcome_user(@user)
-        flash[:notice] = "Sign up successfully"
+        # flash[:notice] = "Sign up successfully"
          render ('index')
       else
         redirect_to root_path, notice: "email or password incorrect"
