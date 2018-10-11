@@ -1,4 +1,6 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="/devices"><img alt="logo" src="/assets/inner-logo-880c6413d3f20851c5842073bfc3a85a549462d9c39771dc4122d3eaf1376947.svg"></a>
@@ -12,9 +14,8 @@
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li>
-
-                        <a href="/users/edit">
+                    <!-- <li>
+                        <a href="#">
                           <i class="fa fa-user fa-fw"></i>
                           User Profile</a>
                     </li>
@@ -22,8 +23,7 @@
                         <a href="#">
                             <i class="fa fa-gear fa-fw"></i>
                             Settings</a>
-                    </li>
-                    <li class="divider"></li>
+                    </li> -->
                     <li>
                         <a rel="nofollow" href="/session/index">
                         <i class="fa fa-sign-out fa-fw"></i>
@@ -33,94 +33,90 @@
                 </ul>
             </li>
         </ul>
-</div>
-</nav>
+    </div>
+  </nav>
 <div class="main-wrapper">
-            <div class="alert-success device-alert-message"></div>
-
-<div class="middle-container">
-  <div class="tab-section page-tab">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xs-12 col-sm-12">
-          <ul class="nav nav-tabs" role="tablist">
-              <button type="button" class="btn btn-link btn-md" data-toggle="modal" data-target="#myModal">Managment</button>
-              <button type="button" class="btn btn-link btn-md" data-toggle="modal" data-target="#m">MQTT Client</button>
-          </ul>
-       </div>
+  <div class="alert-success device-alert-message"></div>
+  <div class="middle-container">
+    <div class="tab-section page-tab">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12">
+            <ul class="nav nav-tabs" role="tablist">
+                <button type="button" class="btn btn-link btn-md" data-toggle="modal" data-target="#myModal">Managment</button>
+                <button type="button" class="btn btn-link btn-md" data-toggle="modal" data-target="#m">MQTT Client</button>
+            </ul>
+         </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="middle-container">
-<% if @devices.present? %>
-  <div class="col-xs-12 col-sm-12">
-          <div class="panel-box">
-            <div class="panel-head">
-              <h2>Devices</h2>
-            </div>
-            <div class="device-detail-table">
-              <div class="table-responsive">
-                <table class="table table-striped ">
-                  <thead>
-                    <tr>
-                      <th>Device Name</th>
-                      <th>Device Id Code</th>
-                      <th>Device Id Communication</th>
-                      <th>Device Date Installation</th>
-                    </tr>
-                  </thead>
-                  <tbody style="height:100px;">
-                    <% @devices.each do |device| %>
+  <div class="middle-container">
+  <% if @devices.present? %>
+    <div class="col-xs-12 col-sm-12">
+            <div class="panel-box">
+              <div class="panel-head">
+                <h2>Devices</h2>
+              </div>
+              <div class="device-detail-table">
+                <div class="table-responsive">
+                  <table class="table table-striped ">
+                    <thead>
                       <tr>
-                        <td><%= device.name %></td>
-                        <td><%= device.id_code %></td>
-                        <td><%= device.id_communication %></td>
-                        <td><%= device.date_installation %></td>
-                        <td><%= link_to image_tag('edit-icon.svg'), edit_device_path(id: device.id) %>
-                         <%= link_to image_tag('delete-icon.svg'), device_path(device.id), :method => :delete , data: { confirm: 'Are you sure?'} %> 
-                         
-                           <!-- <a data-target="#delete_action_Modal" data-toggle="modal" >
-                             <i class="fa fa-trash"></i>
-                            </a> -->
-                        </td>
+                        <th>Device Name</th>
+                        <th>Device Id Code</th>
+                        <th>Device Id Communication</th>
+                        <th>Device Date Installation</th>
                       </tr>
-                    <% end %>
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody style="height:100px;">
+                      <% @devices.each do |device| %>
+                        <tr>
+                          <td><%= device.name %></td>
+                          <td><%= device.id_code %></td>
+                          <td><%= device.id_communication %></td>
+                          <td><%= device.date_installation %></td>
+                          <td><%= link_to image_tag('edit-icon.svg'), edit_device_path(id: device.id) %>
+                             <%= link_to image_tag('delete-icon.svg'), device_path(device.id), :method => :delete , data: { confirm: 'Are you sure?'} %> 
+                            
+                             <!-- <a data-target="#delete_action_Modal" data-toggle="modal" >
+                               <i class="fa fa-trash"></i>
+                              </a> -->
+                          </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
+    </div>
+  <% end %>
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Please select an action</h4>
         </div>
-  </div>
-<% end %>
-
-<div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Please select an action</h4>
-      </div>
-      <div class="modal-body">
-        <%= button_to 'Create a Device', new_device_path, method: :get, class: "btn btn-success" %>
+        <div class="modal-body">
+          <%= button_to 'Create a Device', new_device_path, method: :get, class: "btn btn-success" %>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="modal fade" id="delete_action_Modal" role="dialog">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Are you sure?</h4>
-      </div>
-      <div class="modal-body">
-        <input type="hidden" name="custId" value=id>
-        <%= link_to image_tag('delete-icon.svg'), new_device_path %>
+  <div class="modal fade" id="delete_action_Modal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Are you sure?</h4>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" name="custId" value=id>
+          <%= link_to image_tag('delete-icon.svg'), new_device_path %>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
