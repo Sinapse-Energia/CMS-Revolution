@@ -207,7 +207,14 @@ input.form-control {
     float: left;
     padding: 5px 15px 0px 15px;
 }}
-
+@media (max-width: 767px){
+.navbar-inverse .navbar-right {
+    margin-right: 0;
+    position: fixed;
+    top: 0;
+    right: 6px;
+}
+}
 
 
 /*template views design*/
@@ -269,4 +276,14 @@ p {
 ol, ul {
     margin-top: 0;
     margin-bottom: 10px;
+}
+.btn-link{
+        font-size: 18px;
+}
+.fa-trash {
+    font-size: 20px;
+    color:red;
+}
+.white{
+    background-color: white;
 }
