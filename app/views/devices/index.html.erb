@@ -38,96 +38,37 @@
 <div class="main-wrapper">
   <div class="alert-success device-alert-message"></div>
   <div class="middle-container">
-    <div class="tab-section page-tab">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-xs-12 col-sm-12">
-            <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="js-device-li active">
-                <a aria-controls="globalview" role="tab" data-toggle="tab" class="js-device-tab" href="#globalview" aria-expanded="false">Actuators</a>
+  <div class="tab-section page-tab">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <% tab_list.each_with_index do|(ref, text), index| %>
+              <li role="presentation" class="<%= index.eql?(2) ? 'active' : '' %> js-device-li">
+                <%= link_to text, '#' + ref, 'aria-controls' => ref, role: 'tab', 'data-toggle' => 'tab', class: 'js-device-tab' %>
               </li>
-              <li role="presentation" class="js-device-li  ">
-                <a aria-controls="mqttclient" role="tab" data-toggle="tab" class="js-device-tab" href="#mqttclient" aria-expanded="true">Monitor</a>
-              </li>
-             <%= link_to "Management", device_mqtt_path, :remote => true %>
+            <% end %>
           </ul>
-            <!-- <ul class="nav nav-tabs" role="tablist">
-                <button type="button" class="btn btn-link btn-md" data-toggle="modal" data-target="#myModal">Actuators</button>
-                <button type="button" class="btn btn-link btn-md" data-toggle="modal" data-target="#m">Monitor</button>
-                <button type="button" class="btn btn-link btn-md" data-toggle="modal" data-target="#m">Management</button>
-            </ul> -->
-         </div>
-        </div>
-      </div>
-    </div>
-  </div>
-<!--   <div class="middle-container">
-  <% if @devices.present? %>
-    <div class="col-xs-12 col-sm-12">
-            <div class="panel-box">
-              <div class="panel-head">
-                <h2>Devices</h2>
-              </div>
-              <div class="device-detail-table">
-                <div class="table-responsive">
-                  <table class="table table-striped ">
-                    <thead>
-                      <tr>
-                        <th>Device Name</th>
-                        <th>Device Id Code</th>
-                        <th>Device Id Communication</th>
-                        <th>Device Date Installation</th>
-                      </tr>
-                    </thead>
-                    <tbody style="height:100px;">
-                      <% @devices.each do |device| %>
-                        <tr>
-                          <td><%= device.name %></td>
-                          <td><%= device.id_code %></td>
-                          <td><%= device.id_communication %></td>
-                          <td><%= device.date_installation %></td>
-                          <td><%= link_to image_tag('edit-icon.svg'), edit_device_path(id: device.id) %>
-                             <%= link_to image_tag('delete-icon.svg'), device_path(device.id), :method => :delete , data: { confirm: 'Are you sure?'} %> 
-                            
-                             <!-- <a data-target="#delete_action_Modal" data-toggle="modal" >
-                               <i class="fa fa-trash"></i>
-                              </a> -->
-                         <!--  </td>
-                        </tr>
-                      <% end %>
-                    </tbody>
-                  </table>
-                </div>
+          <div class="col-xs-12">
+            <div class="tabing-select">
+              <div class="custom-dropdown select whtab">
+                <%= devices_dropdown %>
               </div>
             </div>
           </div>
-    </div>
-  <% end %> -->
-   <div id="div_id"></div>
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Please select an action</h4>
-        </div>
-        <div class="modal-body">
-          <%= button_to 'Create a Device', new_device_path, method: :get, class: "btn btn-success" %>
+          <!-- Tab panes -->
+          <div class="tab-content" id="deviceTabs">
+            <%= render partial: 'device_tabs', locals: {device: @device, templates: @templates, message: @message, topic: @topic} %>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="modal fade" id="delete_action_Modal" role="dialog">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Are you sure?</h4>
-        </div>
-        <div class="modal-body">
-          <input type="hidden" name="custId" value=id>
-          <%= link_to image_tag('delete-icon.svg'), new_device_path %>
-        </div>
-      </div>
-    </div>
+</div>
   </div>
+
+   <div id="div_id">
+     
+      <div id="uuu"></div>
+   </div>

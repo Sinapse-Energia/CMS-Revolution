@@ -133,9 +133,17 @@
           </div>
         </div>
           <div class="form-group">
-            <div class="col-xs-12 text-center">
-              <%= f.hidden_field :user_id, value: session[:user_id] %>
-              <button type="submit" class="btn submit-btn-green device-submit">Submit</button>
+            <div class="row ">
+               <div class="col-xs-12">
+                  <div class="col-xs-4 text-center">
+                   <%= link_to "BACK", get_device_path, remote: true , :class => "btn submit-btn-green device-submit" %>
+                  </div>
+                  <div class="col-xs-4"></div>
+                  <div class="col-xs-4 btn-center">
+                    <%= f.hidden_field :user_id, value: session[:user_id] %>
+                    <button type="submit" class="btn submit-btn-green device-submit">Submit</button>
+                  </div>
+              </div>
             </div>
           </div>
     <% end %>
