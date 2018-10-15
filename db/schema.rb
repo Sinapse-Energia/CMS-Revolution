@@ -10,24 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_09_083559) do
+ActiveRecord::Schema.define(version: 2018_10_06_105829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "devices", force: :cascade do |t|
-    t.string "name"
-    t.jsonb "api_json"
-    t.bigint "user_id"
-    t.bigint "template_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text "interfaces_peripherals"
-    t.index ["template_id"], name: "index_devices_on_template_id"
-    t.index ["user_id"], name: "index_devices_on_user_id"
-  end
-
-  create_table "static_data", force: :cascade do |t|
     t.text "name", null: false
     t.text "id_code", null: false
     t.text "id_communication", null: false
@@ -48,16 +36,9 @@ ActiveRecord::Schema.define(version: 2018_10_09_083559) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "templates", force: :cascade do |t|
-    t.string "name"
-    t.string "json_name"
-    t.jsonb "hardware_json"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
-    t.string "name"
+    t.string "first_name"
+    t.string "last_name"
     t.string "email"
     t.string "phone"
     t.string "token"
@@ -66,7 +47,6 @@ ActiveRecord::Schema.define(version: 2018_10_09_083559) do
     t.string "password_reset_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "last_name"
   end
 
 end
