@@ -14,6 +14,7 @@
 //= require rails-ujs
 //= require cable
 //= require turbolinks
+//= datatables/jquery.dataTables
 //= require bootstrap.min
 //= require jquery.dd.min
 //= require jquery.mCustomScrollbar.concat.min
