@@ -72,7 +72,7 @@
             <div class="row">
               <div class="col-xs-12 mb-15">
                 <label>Date Installed:</label>
-                 <%= f.text_field :date_installation, class: 'form-control datepicker', placeholder: 'Device altitude Here', required: true  %> 
+                 <%= f.text_field :date_installation, class: 'form-control datepicker', id: 'picker', placeholder: 'Device altitude Here', required: true  %> 
                
               </div>
             </div>
@@ -161,10 +161,12 @@
     </div>
   </div>
 </div>
+
 <script type="text/javascript">
-  $(document).ready(function(){
-    $('.datepicker').datepicker();
-  });
+  
+
+  $("#picker").datepicker();
+
 
 var text = document.getElementById('latitude');
   text.onkeypress = text.onpaste = checkInput;
