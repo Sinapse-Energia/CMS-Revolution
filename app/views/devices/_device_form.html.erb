@@ -216,12 +216,12 @@ function validateLongitude(){
   debugger
   var longitude = $("#longitude").val();
   debugger
-  if (longitude >= 180 || longitude <= -180){
-     document.getElementById("validation2").innerHTML = "";
-     $("#submit").show();
+  if (longitude > 180 || longitude < -180){
+     document.getElementById("validation2").innerHTML = "Please enter a value within -180 to 180";
+     $("#submit").css('display', 'none');
    }else{
-       document.getElementById("validation2").innerHTML = "Please enter a value within -180 to 180";
-      $("#submit").css('display', 'none');
+       document.getElementById("validation2").innerHTML = "";
+      $("#submit").show();
   }
 };
 
