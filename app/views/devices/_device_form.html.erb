@@ -1,4 +1,11 @@
-<div class="panel-box">
+<% if @device.errors.any? %>
+      <div class="alert alert-danger">
+            There were some errors:
+             <% @device.errors.full_messages.each do |message| %>
+          <li class="red"><%= message %></li>
+          <% end %>
+      </div>
+  <% end %><div class="panel-box">
   <div class="panel-head"></div>
   <div class="dc-management-form">
     <%= form_for(device, html: {class: 'form-horizontal', multipart: true}) do |f| %>
@@ -6,6 +13,7 @@
           <div class="col-xs-12 col-sm-6 mb-xs-15">
             <div class="row">
               <div class="col-xs-12 mb-15">
+                <label>Name:</label>
                 <%= f.text_field :name, class: 'form-control', placeholder: 'Device Name Here', required: true %>
               </div>
             </div>
@@ -13,6 +21,7 @@
           <div class="col-xs-12 col-sm-6 mb-xs-15">
             <div class="row">
               <div class="col-xs-12 mb-15">
+                <label>Id Code:</label>
                 <%= f.text_field :id_code, class: 'form-control', placeholder: 'Device ID Code Here', required: true %>
               </div>
             </div>
@@ -20,6 +29,7 @@
           <div class="col-xs-12 col-sm-6 mb-xs-15">
             <div class="row">
               <div class="col-xs-12 mb-15">
+                <label>Id Communication:</label>
                 <%= f.text_field :id_communication, class: 'form-control', placeholder: 'Device ID Communication Here', required: true %>
               </div>
             </div>
@@ -27,6 +37,7 @@
           <div class="col-xs-12 col-sm-6 mb-xs-15">
             <div class="row">
               <div class="col-xs-12 mb-15">
+                <label>Location:</label>
                 <%= f.text_field :location, class: 'form-control', placeholder: 'Device location Here', required: true %>
               </div>
             </div>
@@ -34,34 +45,42 @@
           <div class="col-xs-12 col-sm-6 mb-xs-15">
             <div class="row">
               <div class="col-xs-12 mb-15">
-                <%= f.text_field :latitude, class: 'form-control', placeholder: 'Device latitude Here', required: true %>
+                <label>Latitude:</label>
+                <%= f.text_field :latitude, class: 'form-control', id: 'latitude', placeholder: 'Device latitude Here', required: true %>
+              <span id="validation1" class="clearBtn"></span>
               </div>
             </div>
           </div>
           <div class="col-xs-12 col-sm-6 mb-xs-15">
             <div class="row">
               <div class="col-xs-12 mb-15">
-                <%= f.text_field :longitude, class: 'form-control', placeholder: 'Device longitude Here', required: true %>
+                <label>Longitude:</label>
+                <%= f.text_field :longitude, class: 'form-control',id: 'longitude',  placeholder: 'Device longitude Here', required: true %>
+              <span id="validation2" class="clearBtn"></span>
               </div>
             </div>
           </div>
           <div class="col-xs-12 col-sm-6 mb-xs-15">
             <div class="row">
               <div class="col-xs-12 mb-15">
-                <%= f.text_field :altitude, class: 'form-control', placeholder: 'Device altitude Here', required: true %>
+                <label>Altitude:</label>
+                <%= f.text_field :altitude, class: 'form-control', id: 'altitude',  placeholder: 'Device altitude Here', required: true %>
               </div>
             </div>
           </div>
           <div class="col-xs-12 col-sm-6 mb-xs-15">
             <div class="row">
               <div class="col-xs-12 mb-15">
-                <%= f.text_field :date_installation, class: 'form-control', placeholder: 'Device Date Installation Here', required: true %>
+                <label>Date Installed:</label>
+                <%= f.text_field :date_installation, class: 'form-control datepicker', id: 'picker', placeholder: 'Device altitude Here', required: true  %> 
+               
               </div>
             </div>
           </div>
           <div class="col-xs-12 col-sm-6 mb-xs-15">
             <div class="row">
               <div class="col-xs-12 mb-15">
+                <label>Circuit Number:</label>
                 <%= f.text_field :circuit_number, class: 'form-control', placeholder: 'Device Circuit Number Here', required: true %>
               </div>
             </div>
@@ -69,6 +88,7 @@
           <div class="col-xs-12 col-sm-6 mb-xs-15">
             <div class="row">
               <div class="col-xs-12 mb-15">
+                <label>Name Street:</label>
                 <%= f.text_field :name_street, class: 'form-control', placeholder: 'Device Name Street Here', required: true %>
               </div>
             </div>
@@ -76,6 +96,7 @@
           <div class="col-xs-12 col-sm-6 mb-xs-15">
             <div class="row">
               <div class="col-xs-12 mb-15">
+                <label>Number Street:</label>
                 <%= f.text_field :number_street, class: 'form-control', placeholder: 'Device Number Street Here', required: true %>
               </div>
             </div>
@@ -83,6 +104,7 @@
           <div class="col-xs-12 col-sm-6 mb-xs-15">
             <div class="row">
               <div class="col-xs-12 mb-15">
+                <label>Power Installed:</label>
                 <%= f.text_field :power_installed, class: 'form-control', placeholder: 'Device Power Installed Here', required: true %>
               </div>
             </div>
@@ -90,6 +112,7 @@
           <div class="col-xs-12 col-sm-6 mb-xs-15">
             <div class="row">
               <div class="col-xs-12 mb-15">
+                <label>Power Contracted:</label>
                 <%= f.text_field :power_contracted, class: 'form-control', placeholder: 'Device Power Contracted Here', required: true %>
               </div>
             </div>
@@ -97,6 +120,7 @@
           <div class="col-xs-12 col-sm-6 mb-xs-15">
             <div class="row">
               <div class="col-xs-12 mb-15">
+                <label>Id Supply Contract:</label>
                 <%= f.text_field :id_supply_contract, class: 'form-control', placeholder: 'Deviceid Supply Contract Here', required: true %>
               </div>
             </div>
@@ -104,6 +128,7 @@
           <div class="col-xs-12 col-sm-6 mb-xs-15">
             <div class="row">
               <div class="col-xs-12 mb-15">
+                <label>lock Brand:</label>
                 <%= f.text_field :clock_brand, class: 'form-control', placeholder: 'Device Clock Brand Here', required: true %>
               </div>
             </div>
@@ -111,18 +136,97 @@
           <div class="col-xs-12 col-sm-6 mb-xs-15">
             <div class="row">
               <div class="col-xs-12 mb-15">
+                <label>Clock Model:</label>
                 <%= f.text_field :clock_model, class: 'form-control', placeholder: 'Device Clock Model Here', required: true %>
               </div>
             </div>
           </div>
         </div>
           <div class="form-group">
-            <div class="col-xs-12 text-center">
-              <%= f.hidden_field :user_id, value: session[:user_id] %>
-              <button type="submit" class="btn submit-btn-green device-submit">Submit</button>
+            <div class="row ">
+               <div class="col-xs-12">
+                  <div class="col-xs-4 text-center">
+                   <%= link_to "BACK", get_device_path, remote: true , :class => "btn submit-btn-green device-submit" %>
+                  </div>
+                  <div class="col-xs-4"></div>
+                  <div class="col-xs-4 btn-center">
+                    <%= f.hidden_field :user_id, value: session[:user_id] %>
+                    <button type="submit" class="btn submit-btn-green device-submit" id="submit">Submit</button>
+                    <span id="validation3" class="clearBtn"></span>
+                  </div>
+              </div>
             </div>
           </div>
     <% end %>
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  
+
+  $("#picker").datepicker({
+    dateFormat: "dd-mm-yy"
+  });
+
+
+var text = document.getElementById('latitude');
+  text.onkeypress = text.onpaste = checkInput;
+   function checkInput(e) {
+        var e = e || event;
+        var char = e.type == 'keypress' 
+            ? String.fromCharCode(e.keyCode || e.which) 
+            : (e.clipboardData || window.clipboardData).getData('text/plain');
+           if (/[^\d+-.]/gi.test(char)) {
+               document.getElementById("validation1").innerHTML = "Only digits are allowed";
+              return false;
+              }else{
+              document.getElementById("validation1").innerHTML = "";
+              return true; } 
+      }
+
+var text = document.getElementById('longitude');
+  text.onkeypress = text.onpaste = checkInput;
+   function checkInput(e) {
+        var e = e || event;
+        var char = e.type == 'keypress' 
+            ? String.fromCharCode(e.keyCode || e.which) 
+            : (e.clipboardData || window.clipboardData).getData('Text');
+           if (/[^\d+-.]/gi.test(char)) {
+               document.getElementById("validation2").innerHTML = "Only digits are allowed";
+              return false;
+              }else{
+              document.getElementById("validation2").innerHTML = "";
+              return true; } 
+      }
+
+$(document).ready(function() {
+    $("#latitude").keyup(validateLatitude);
+    $("#longitude").keyup(validateLongitude);
+ });
+
+function validateLatitude(){
+  debugger
+  var latitude = $("#latitude").val();
+  if (latitude > 90 || latitude < -90){
+     document.getElementById("validation2").innerHTML = "Please enter a value within -90 to 90";
+     $("#submit").css('display', 'none');
+  }else{
+     document.getElementById("validation2").innerHTML = "";
+     $("#submit").show();
+  }
+};
+function validateLongitude(){
+  debugger
+  var longitude = $("#longitude").val();
+  debugger
+  if (longitude > 180 || longitude < -180){
+     document.getElementById("validation2").innerHTML = "Please enter a value within -180 to 180";
+     $("#submit").css('display', 'none');
+   }else{
+       document.getElementById("validation2").innerHTML = "";
+      $("#submit").show();
+  }
+};
+
+</script>

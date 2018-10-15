@@ -3,6 +3,7 @@
 class DevicesController < ApplicationController
   before_action :fetch_device, except: [:index, :create, :new]
   before_action :authorize
+  
   def index
     @devices = Device.all
   end
@@ -23,6 +24,9 @@ class DevicesController < ApplicationController
 
   def edit
     @devices = Device.all
+    respond_to do |format|               
+       format.js
+    end
   end
 
   def update
@@ -34,7 +38,29 @@ class DevicesController < ApplicationController
     @device = Device.find_by(id: params[:id])
     @device.destroy
   end
+
+  def device_mqtt
+    respond_to do |format|               
+       format.js
+    end 
+  end
  
+  def create_device
+    @device = Device.new
+    respond_to do |format|               
+       format.js
+    end 
+  end
+
+  def get_device
+    
+    @devices = Device.all
+    respond_to do |format|               
+       format.js
+       format.html
+    end 
+  end
+
  private
 
   def device_params

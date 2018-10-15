@@ -1,0 +1,61 @@
+
+<div class="middle-container">
+  <% if @devices.present? %>
+    <div class="col-xs-12 col-sm-12">
+            <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h2>Devices</h2>
+              </div>
+              <div class="panel-body">
+              <div class="">
+                <div class="">
+                  <table id= "table-data"   class="table table-condensed table-striped table-bordered nowrap table-responsive" width="100% ">
+                    <thead>
+                      <tr>
+                        <th>Device Name</th>
+                        <th>Device Id Code</th>
+                        <th>Device Id Communication</th>
+                        <th>Device Date Installation</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody style="height:100px;">
+                      <% @devices.each do |device| %>
+                        <tr>
+                          <td><%= device.name %></td>
+                          <td><%= device.id_code %></td>
+                          <td><%= device.id_communication %></td>
+                          <td><%= device.date_installation %></td>
+                          <td><%= link_to image_tag('edit-icon.svg'), edit_device_path(id: device.id), remote: true %>
+                            <%= link_to image_tag('delete-icon.svg'), device_path(device.id), :method => :delete , remote: true ,data: { confirm: 'Are you sure?'} %>  
+                            
+                           <!--   <%= link_to image_tag('delete-icon.svg'), '#',  :method => :delete , remote: true, :onclick => 'check();' %>  -->
+                          </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>>
+            </div>
+            <%= button_to 'Create a Device', create_device_path, method: :get, remote: true,  class: "btn submit-btn-green device-submit btn-right" %>
+      </div>
+    </div>
+    <% else %>
+      <!-- <div class="middle-container"> -->
+        <div class="panel-box">
+          <%= button_to 'Create a Device', create_device_path, method: :get, remote: true,class: "btn submit-btn-green device-submit btn-right" %>
+        </div>
+    <% end %>
+   
+   
+
+   <script type="text/javascript">
+$(document).ready(function() {
+    var table = $('#table-data').DataTable( {
+        responsive: true
+    } );
+ 
+    new $.fn.dataTable.FixedHeader( table );
+} );  </script>

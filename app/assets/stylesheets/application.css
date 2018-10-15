@@ -10,7 +10,7 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
+ *= require_tree . 
  *= require_self
  */
  
@@ -286,4 +286,24 @@ ol, ul {
 }
 .white{
     background-color: white;
+}
+ .btn-right{
+    float: right;
+}
+.help-inline {
+      color: red;
+      float: right;
+    }
+
+span{
+    float: right;
+    font-size: 18px;
+ }
+ .clearBtn {
+  position: absolute;
+  top: 0;
+  right: -15px;
+  transition: right 0.2s;
+  right: 5px;
+  color: red;
 }
