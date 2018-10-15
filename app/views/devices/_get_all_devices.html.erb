@@ -8,7 +8,7 @@
               </div>
               <div class="device-detail-table">
                 <div class="table-responsive">
-                  <table class="table table-striped ">
+                  <table id= "table-data" class="table table-striped table-responsive">
                     <thead>
                       <tr>
                         <th>Device Name</th>
@@ -25,11 +25,9 @@
                           <td><%= device.id_communication %></td>
                           <td><%= device.date_installation %></td>
                           <td><%= link_to image_tag('edit-icon.svg'), edit_device_path(id: device.id), remote: true %>
-                             <%= link_to image_tag('delete-icon.svg'), device_path(device.id), :method => :delete , data: { confirm: 'Are you sure?'} %> 
+                            <%= link_to image_tag('delete-icon.svg'), device_path(device.id), :method => :delete , remote: true ,data: { confirm: 'Are you sure?'} %>  
                             
-                             <!-- <a data-target="#delete_action_Modal" data-toggle="modal" >
-                               <i class="fa fa-trash"></i>
-                              </a> -->
+                           <!--   <%= link_to image_tag('delete-icon.svg'), '#',  :method => :delete , remote: true, :onclick => 'check();' %>  -->
                           </td>
                         </tr>
                       <% end %>
@@ -39,10 +37,12 @@
               </div>
             </div>
             <%= button_to 'Create a Device', create_device_path, method: :get, remote: true,  class: "btn submit-btn-green device-submit btn-right" %>
-          </div>
+      </div>
     </div>
     <% else %>
-      <div class="col-xs-12 col-sm-12">
-          <%= button_to 'Create a Device', new_device_path, method: :get, class: "btn btn-success btn-right" %>
-      </div>
+      <!-- <div class="middle-container"> -->
+        <div class="panel-box">
+          <%= button_to 'Create a Device', create_device_path, method: :get, remote: true,class: "btn submit-btn-green device-submit btn-right" %>
+        </div>
     <% end %>
+   
