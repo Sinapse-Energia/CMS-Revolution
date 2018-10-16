@@ -151,8 +151,7 @@
                   <div class="col-xs-4"></div>
                   <div class="col-xs-4 btn-center">
                     <%= f.hidden_field :user_id, value: session[:user_id] %>
-                    <button type="submit" class="btn submit-btn-green device-submit" id="submit">Submit</button>
-                    <span id="validation3" class="clearBtn"></span>
+                    <button type="submit" class="btn submit-btn-green device-submit" id="submit" >Submit</button>
                   </div>
               </div>
             </div>
@@ -206,27 +205,35 @@ $(document).ready(function() {
  });
 
 function validateLatitude(){
-  debugger
   var latitude = $("#latitude").val();
-  if (latitude > 90 || latitude < -90){
-     document.getElementById("validation2").innerHTML = "Please enter a value within -90 to 90";
-     $("#submit").css('display', 'none');
-  }else{
+  if (latitude >= -90 && latitude <= -1){
      document.getElementById("validation2").innerHTML = "";
      $("#submit").show();
-  }
+  }else{
+    if (latitude <= 90 && latitude >= 0){
+     document.getElementById("validation2").innerHTML = "";
+     $("#submit").show();
+    }else{
+     document.getElementById("validation2").innerHTML = "Please enter a value within -90 to 90";
+     $("#submit").css('display', 'none');
+   }
+  } 
 };
+
 function validateLongitude(){
-  debugger
   var longitude = $("#longitude").val();
-  debugger
-  if (longitude > 180 || longitude < -180){
+  if (longitude >= -180 && longitude <= -1){
+     document.getElementById("validation2").innerHTML = "";
+     $("#submit").show();
+  }else{
+    if (longitude <= 180 && longitude >= 0){
+     document.getElementById("validation2").innerHTML = "";
+     $("#submit").show();
+    }else{
      document.getElementById("validation2").innerHTML = "Please enter a value within -180 to 180";
      $("#submit").css('display', 'none');
-   }else{
-       document.getElementById("validation2").innerHTML = "";
-      $("#submit").show();
-  }
+   }
+  } 
 };
 
 </script>
