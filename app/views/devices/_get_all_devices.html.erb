@@ -1,15 +1,12 @@
 
 <div class="middle-container">
   <% if @devices.present? %>
-    <div class="col-xs-12 col-sm-12">
-            <div class="panel panel-primary">
+       <div class="panel panel-primary">
               <div class="panel-heading">
                 <h2>Devices</h2>
               </div>
               <div class="panel-body">
-              <div class="">
-                <div class="">
-                  <table id= "table-data"   class="table table-condensed table-striped table-bordered nowrap table-responsive" width="100% ">
+                  <table id= "table-data"   class="table table-condensed table-striped table-bordered nowrap" width="100%">
                     <thead>
                       <tr>
                         <th>Device Name</th>
@@ -36,26 +33,21 @@
                     </tbody>
                   </table>
                 </div>
-              </div>
-            </div>
-            </div>
+       </div>
             <%= button_to 'Create a Device', create_device_path, method: :get, remote: true,  class: "btn submit-btn-green device-submit btn-right" %>
-      </div>
-    </div>
-    <% else %>
+    </div>   
+  <% else %>
       <!-- <div class="middle-container"> -->
         <div class="panel-box">
           <%= button_to 'Create a Device', create_device_path, method: :get, remote: true,class: "btn submit-btn-green device-submit btn-right" %>
         </div>
     <% end %>
-   
-   
 
-   <script type="text/javascript">
-$(document).ready(function() {
-    var table = $('#table-data').DataTable( {
-        responsive: true
-    } );
- 
-    new $.fn.dataTable.FixedHeader( table );
-} );  </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var table = $('#table-data').DataTable({
+            responsive: true
+        });
+     
+    } ); 
+</script>
