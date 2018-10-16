@@ -5,10 +5,10 @@
 
 
 # Change these
-set :application, 'cms_revolution'
+set :application, 'CMS-Revolution'
 set :repo_url,        'git@github.com:Sinapse-Energia/CMS-Revolution.git'
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
-set :deploy_to, '/var/www/cms_revolution'
+set :deploy_to, '/var/www/CMS-Revolution'
 set :pty, true
 set :linked_files, %w{config/database.yml config/application.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
@@ -45,44 +45,7 @@ namespace :puma do
 
   before :start, :make_dirs
 end
-set :sidekiq_default_hooks => true
-set :sidekiq_pid => File.join(shared_path, 'tmp', 'pids', 'sidekiq.pid') # ensure this path exists in production before deploying.
-set :sidekiq_env => fetch(:rack_env, fetch(:rails_env, fetch(:stage)))
-set :sidekiq_log => File.join(shared_path, 'log', 'sidekiq.log')
-set :sidekiq_options => nil
-set :sidekiq_require => nil
-set :sidekiq_tag => nil
-set :sidekiq_config => nil # if you have a config/sidekiq.yml, do not forget to set this. 
-set :sidekiq_queue => nil
-set :sidekiq_timeout => 10
-set :sidekiq_role => :app
-set :init_system, :systemd
-set :service_unit_name, "sidekiq-#{fetch(:application)}-#{fetch(:stage)}.service"
-set :sidekiq_processes => 1
-set :sidekiq_options_per_process => nil
-set :sidekiq_concurrency => nil
-set :sidekiq_use_signals => false
-# sidekiq monit
-set :sidekiq_monit_templates_path => 'config/deploy/templates'
-set :sidekiq_monit_conf_dir => '/etc/monit/conf.d'
-set :sidekiq_monit_use_sudo => true
-set :sidekiq_monit_default_hooks => true
-set :sidekiq_monit_group => nil
-set :sidekiq_service_name => "sidekiq_#{fetch(:application)}_#{fetch(:sidekiq_env)}" 
 
-set :sidekiq_cmd => "#{fetch(:bundle_cmd, "bundle")} exec sidekiq" # Only for capistrano2.5
-set :sidekiqctl_cmd => "#{fetch(:bundle_cmd, "bundle")} exec sidekiqctl" # Only for capistrano2.5
-set :sidekiq_user => nil #user to run sidekiq as
-set :ssh_options,{ forward_agent: true, user: 'deploy', keys: %w(~/.ssh/id_rsa) }
-set :pty,  false
-# Default branch is :master
-# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
-
-# Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, '/var/www/my_app_name'
-
-# Default value for :scm is :git
-# set :scm, :git
 namespace :rails do
   desc 'Open a rails console `cap [staging] rails:console [server_index default: 0]`'
   task :console do    
@@ -97,27 +60,6 @@ namespace :rails do
     exec cmd
   end
 end
-# Default value for :format is :airbrussh.
-# set :format, :airbrussh
-
-# You can configure the Airbrussh format using :format_options.
-# These are the defaults.
-# set :format_options, command_output: true, log_file: 'log/capistrano.log', color: :auto, truncate: :auto
-
-# Default value for :pty is false
-# set :pty, true
-
-# Default value for :linked_files is []
-# set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
-
-# Default value for linked_dirs is []
-# set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system')
-
-# Default value for default_env is {}
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
-
-# Default value for keep_releases is 5
-# set :keep_releases, 5
 
 namespace :deploy do
   desc "Make sure local git is in sync with remote."
