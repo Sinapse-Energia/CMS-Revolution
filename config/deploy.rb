@@ -99,6 +99,7 @@ namespace :deploy do
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
+  after  :finishing,    :restart
   # after :finishing,     :pumaconfigln
   # after  :finishing,    :restart
 end
