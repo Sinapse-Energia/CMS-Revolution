@@ -82,6 +82,7 @@
               <div class="col-xs-12 mb-15">
                 <label>Circuit Number:</label>
                 <%= f.text_field :circuit_number, class: 'form-control', placeholder: 'Device Circuit Number Here', required: true %>
+                <span id="circuit_validation" class="clearBtn" style="margin-top: 15px"></span>
               </div>
             </div>
           </div>
@@ -163,70 +164,59 @@
 </div>
 
 <script type="text/javascript">
-  
-
   $("#picker").datepicker({
-    dateFormat: "dd-mm-yy"
+    dateFormat: "dd-mm-yy",
+    todayBtn: true,
+    autoclose: true
   });
 
+  $("#latitude").on("keyup keydown",function(e){
+    var latitude_range = $(this).val();
+    data = "latitude range is between -90 to +90"
+    if(latitude_range < -90){
+      $(this).val(-90);
+      $("#validation1").html(data).fadeIn('slow')
+      $("#validation1").show()
+    }else if(latitude_range > 90){
+      $(this).val(90);
+      $("#validation1").html(data).fadeIn('slow')
+      $("#validation1").show()
+    }else{
+      $('#validation1').hide()
+    }
+  })
 
-var text = document.getElementById('latitude');
-  text.onkeypress = text.onpaste = checkInput;
-   function checkInput(e) {
-        var e = e || event;
-        var char = e.type == 'keypress' 
-            ? String.fromCharCode(e.keyCode || e.which) 
-            : (e.clipboardData || window.clipboardData).getData('text/plain');
-           if (/[^\d+-.]/gi.test(char)) {
-               document.getElementById("validation1").innerHTML = "Only digits are allowed";
-              return false;
-              }else{
-              document.getElementById("validation1").innerHTML = "";
-              return true; } 
-      }
+  $("#longitude").on("keyup keydown",function(e){
+    var longitude_range = $(this).val();
+    data = "longitude range is between -180 to +180"
+    if(longitude_range < -180){
+      $(this).val(-180);
+      $("#validation2").html(data).fadeIn('slow')
+      $("#validation2").show()
+    }else if(longitude_range > 180){
+      $(this).val(180);
+      $("#validation2").html(data).fadeIn('slow')
+      $("#validation2").show()
+    }else{
+      $("#validation2").hide()
+    }
+  })
 
-var text = document.getElementById('longitude');
-  text.onkeypress = text.onpaste = checkInput;
-   function checkInput(e) {
-        var e = e || event;
-        var char = e.type == 'keypress' 
-            ? String.fromCharCode(e.keyCode || e.which) 
-            : (e.clipboardData || window.clipboardData).getData('Text');
-           if (/[^\d+-.]/gi.test(char)) {
-               document.getElementById("validation2").innerHTML = "Only digits are allowed";
-              return false;
-              }else{
-              document.getElementById("validation2").innerHTML = "";
-              return true; } 
-      }
-
-$(document).ready(function() {
-    $("#latitude").keyup(validateLatitude);
-    $("#longitude").keyup(validateLongitude);
- });
-
-function validateLatitude(){
-  debugger
-  var latitude = $("#latitude").val();
-  if (latitude > 90 || latitude < -90){
-     document.getElementById("validation2").innerHTML = "Please enter a value within -90 to 90";
-     $("#submit").css('display', 'none');
-  }else{
-     document.getElementById("validation2").innerHTML = "";
-     $("#submit").show();
-  }
-};
-function validateLongitude(){
-  debugger
-  var longitude = $("#longitude").val();
-  debugger
-  if (longitude > 180 || longitude < -180){
-     document.getElementById("validation2").innerHTML = "Please enter a value within -180 to 180";
-     $("#submit").css('display', 'none');
-   }else{
-       document.getElementById("validation2").innerHTML = "";
-      $("#submit").show();
-  }
-};
-
+  $("#device_circuit_number").on("keyup keydown",function(e){
+    var device_circuit_number_range = $(this).val();
+    data = "Number of circuits managed by the CMC. Minimum = 0, Maximum = 7"
+    if(device_circuit_number_range < 0){
+      $(this).val(0);
+      $("#circuit_validation").html(data).fadeIn('slow')
+      $('#circuit_validation').delay(500).fadeOut('slow');
+      $("#circuit_validation").show()
+    }else if(device_circuit_number_range > 7){
+      $(this).val(7);
+      $("#circuit_validation").html(data).fadeIn('slow')
+      $('#circuit_validation').delay(500).fadeOut('slow');
+      $("#circuit_validation").show()
+    }else{
+      $("#circuit_validation").hide()
+    }
+  })
 </script>

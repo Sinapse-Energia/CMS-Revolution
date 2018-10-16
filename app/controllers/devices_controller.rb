@@ -14,11 +14,19 @@ class DevicesController < ApplicationController
   end
 
   def create
-     @device = Device.new(device_params)
-    if @device.save
-      redirect_to :devices
+    @same_id_code = Device.find_by(id_code: params[:id_code])
+    @same_id_communication = Device.find_by(id_communication: params[:id_communication])
+    @device = Device.new(device_params)
+    if @same_id_communication
+      flash[:notice] = "Duplicate Communication ID"
+    elsif @same_id_code
+      flash[:notice] = "Duplicate ID Code"
     else
-      redirect_to new_device_path
+      if @device.save
+        redirect_to :devices
+      else
+        redirect_to new_device_path
+      end
     end
   end
 

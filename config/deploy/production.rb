@@ -49,8 +49,9 @@
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------
-server '52.58.132.246',
-  user: 'ubuntu',
+server '54.93.72.102',
+  user: 'deploy',
+  password: "deploy123",
   roles: %w{web app db},
   ssh_options: {
     user: 'ubuntu', # overrides user setting above
