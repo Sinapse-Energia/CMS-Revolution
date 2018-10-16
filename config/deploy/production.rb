@@ -49,12 +49,12 @@
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------
-server '52.58.132.246',
+server '54.93.72.102',
   user: 'ubuntu',
   roles: %w{web app db},
   ssh_options: {
-    user: 'ubuntu', # overrides user setting above
-    keys: %w(/home/enbake/.ssh/cms.pem),
+    user: 'deploy', # overrides user setting above
+    keys: %w(/home/deploy/.ssh/id_rsa),
     forward_agent: true,
     auth_methods: %w(publickey)
     # password: 'please use keys'

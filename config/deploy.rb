@@ -1,44 +1,39 @@
-# config valid for current version and patch releases of Capistrano
-# lock "~> 3.10.1"
+# config valid only for current version of Capistrano
+# lock "3.9.1"
 
-set :application, "cms_revolution"
-set :repo_url, "git@github.com:Sinapse-Energia/CMS-Revolution.git"
+#deploy production
 
+
+# Change these
+set :application, 'CMS-Revolution'
+set :repo_url,        'git@github.com:Sinapse-Energia/CMS-Revolution.git'
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+set :deploy_to, '/var/www/'
+set :pty, true
+set :linked_files, %w{config/database.yml config/application.yml}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
+set :keep_releases, 5
+set :rvm_type, :user
+set :rvm_ruby_version, 'ruby-2.2.3' # Edit this if you are using MRI Ruby
 
-set :deploy_to, '/var/www/cms_revolution'
-# set :deploy_to, -> { "#{fetch(:application)}" }
-set :user,            'deploy'
-set :use_sudo, false
-set :puma_threads,    [4, 16]
-set :puma_workers,    0
-
-# Don't change these unless you know what you're doing
-set :pty,             true
-set :use_sudo,        false
-set :stage,           :production
-set :deploy_via,      :remote_cache
-set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
-set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
-set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
-set :puma_access_log, "#{release_path}/log/puma.error.log"
-set :puma_error_log,  "#{release_path}/log/puma.access.log"
-set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
-set :puma_preload_app, true
+set :puma_rackup, -> { File.join(current_path, 'config.ru') }
+set :puma_state, "#{shared_path}/tmp/pids/puma.state"
+set :puma_pid, "#{shared_path}/tmp/pids/puma.pid"
+set :puma_bind, "unix://#{shared_path}/tmp/sockets/puma.sock"    #accept array for multi-bind
+set :puma_conf, "#{shared_path}/puma.rb"
+set :puma_access_log, "#{shared_path}/log/puma_error.log"
+set :puma_error_log, "#{shared_path}/log/puma_access.log"
+set :puma_role, :app
+set :puma_env, fetch(:rack_env, fetch(:rails_env, 'production'))
+set :puma_threads, [0, 8]
+set :puma_workers, 0
 set :puma_worker_timeout, nil
-set :puma_init_active_record, true  # Change to false when not using ActiveRecord
+set :puma_init_active_record, true
+set :puma_preload_app, false
 
-## Defaults:
-# set :scm,           :git
-# set :branch,        :master
-# set :format,        :pretty
-# set :log_level,     :debug
-# set :keep_releases, 5
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
-## Linked Files & Directories (Default None):
-# set :linked_files, %w{config/database.yml}
-# set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
-
+set :bundle_binstubs, nil
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
   task :make_dirs do
@@ -49,6 +44,21 @@ namespace :puma do
   end
 
   before :start, :make_dirs
+end
+
+namespace :rails do
+  desc 'Open a rails console `cap [staging] rails:console [server_index default: 0]`'
+  task :console do    
+    server = roles(:app)[ARGV[2].to_i]
+
+    puts "Opening a console on: #{server.hostname}...."
+
+    cmd = "ssh #{fetch(:user)}@#{server.hostname} -t 'cd #{fetch(:deploy_to)}/current && RAILS_ENV=#{fetch(:rails_env)} bundle exec rails console'"
+
+    puts cmd
+
+    exec cmd
+  end
 end
 
 namespace :deploy do
@@ -63,6 +73,7 @@ namespace :deploy do
     end
   end
 
+  
   desc 'Initial Deploy'
   task :initial do
     on roles(:app) do
@@ -78,59 +89,29 @@ namespace :deploy do
     end
   end
 
+  # desc 'Set for upstart'
+  #   task :pumaconfigln do
+  #     on roles(:app) do
+  #     execute "ln -s #{shared_path}/puma.rb #{fetch(:deploy_to)}/current/config/puma.rb"
+  #   end
+  # end
+
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
-  after  :finishing,    :restart
+  # after :finishing,     :pumaconfigln
+  # after  :finishing,    :restart
 end
-
-
-
-
-
-
-
-
-
-
-
-
-# set :branch, 'master'
-# set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
-
-# set :pty, true
-
-# set :linked_files, %w{config/database.yml config/secrets.yml}
-
-# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
-
-# set :keep_releases, 5
-
-# set :rvm_type, :user
-
-# set :rvm_ruby_version, 'ruby-2.5.1' # Should match ruby version
-
-
 # namespace :deploy do
-#   # make sure we're deploying what we think we're deploying
-#   before :deploy, "deploy:check_revision"
-#   # only allow a deploy with passing tests to deployed
-#   # compile assets locally then rsync
-#   after 'deploy:symlink:shared', 'deploy:compile_assets_locally'
-#   after :finishing, 'deploy:cleanup'
 
-#   # remove the default nginx configuration as it will tend
-#   # to conflict with our configs.
-#   # before 'deploy:setup_config', 'nginx:remove_default_vhost'
+#   after :restart, :clear_cache do
+#     on roles(:web), in: :groups, limit: 3, wait: 10 do
+#       # Here we can do anything such as:
+#       # within release_path do
+#       #   execute :rake, 'cache:clear'
+#       # end
+#     end
+#   end
 
-#   # reload nginx to it will pick up any modified vhosts from
-#   # setup_config
-#   # after 'deploy:setup_config', 'nginx:reload'
-
-#   # Restart monit so it will pick up any monit configurations
-#   # we've added
-
-#   # As of Capistrano 3.1, the `deploy:restart` task is not called
-#   # automatically.
-#   after 'deploy:publishing', 'deploy:restart'
 # end
+
