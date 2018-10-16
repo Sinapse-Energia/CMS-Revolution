@@ -21,6 +21,6 @@ production:
   encoding: unicode
   database: cms_device_app_production
   pool: 10
-  username: jlaqqupvitpeoz
-  password: b1967c8317f05f10ec8e7b3d4753c7823da386cfbc39970914c9f6e334cad02a
+  username: enbake
+  password: enbake
   host: localhost
