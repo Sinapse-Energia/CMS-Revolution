@@ -54,7 +54,7 @@ class DevicesController < ApplicationController
   end
 
   def get_device
-    @devices = Device.all
+    @devices = Device.where(user_id: current_user.id)
     respond_to do |format|               
        format.js
        format.html
