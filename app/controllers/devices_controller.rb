@@ -23,7 +23,7 @@ class DevicesController < ApplicationController
   end
 
   def edit
-    @devices = Device.all
+    @devices = Device.find_by(id: params[:id])
     respond_to do |format|               
        format.js
     end
