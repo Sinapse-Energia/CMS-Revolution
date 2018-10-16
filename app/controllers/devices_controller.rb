@@ -5,7 +5,7 @@ class DevicesController < ApplicationController
   before_action :authorize
   
   def index
-    @devices = Device.all
+    @devices = Device.where(user_id: current_user.id)
   end
 
   def new
@@ -14,7 +14,7 @@ class DevicesController < ApplicationController
   end
 
   def create
-     @device = Device.new(device_params)
+    @device = Device.new(device_params)
     if @device.save
       redirect_to :devices
     else
@@ -64,7 +64,7 @@ class DevicesController < ApplicationController
  private
 
   def device_params
-    params.require(:device).permit(:name, :id_code, :id_communication, :location, :longitude, :latitude, :altitude, :date_installation, :circuit_number, :name_street, :number_street, :power_installed, :power_contracted, :id_supply_contract, :clock_brand, :clock_model)
+    params.require(:device).permit(:name, :id_code, :id_communication, :location, :longitude, :latitude, :altitude, :date_installation, :circuit_number, :name_street, :number_street, :power_installed, :power_contracted, :id_supply_contract, :clock_brand, :clock_model, :user_id)
   end
 
   def fetch_device
