@@ -50,13 +50,6 @@
               </li>
             <% end %>
           </ul>
-          <div class="col-xs-12">
-            <div class="tabing-select">
-              <div class="custom-dropdown select whtab">
-                <%= devices_dropdown %>
-              </div>
-            </div>
-          </div>
           <!-- Tab panes -->
           <div class="tab-content" id="deviceTabs">
             <%= render partial: 'device_tabs', locals: {device: @device} %>
