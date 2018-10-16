@@ -18,7 +18,7 @@ class DevicesController < ApplicationController
     if @device.save
       redirect_to :devices
     else
-      redirect_to new_device_path
+      redirect_to :back
     end
   end
 
@@ -53,7 +53,6 @@ class DevicesController < ApplicationController
   end
 
   def get_device
-    
     @devices = Device.all
     respond_to do |format|               
        format.js

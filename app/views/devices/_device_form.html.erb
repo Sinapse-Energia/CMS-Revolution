@@ -81,7 +81,8 @@
             <div class="row">
               <div class="col-xs-12 mb-15">
                 <label>Circuit Number:</label>
-                <%= f.text_field :circuit_number, class: 'form-control', placeholder: 'Device Circuit Number Here', required: true %>
+                <%= f.text_field :circuit_number, class: 'form-control', id: 'circuit_number', placeholder: 'Device Circuit Number Here', required: true %>
+                <span id="validation3" class="clearBtn"></span>
               </div>
             </div>
           </div>
@@ -202,20 +203,20 @@ var text = document.getElementById('longitude');
 $(document).ready(function() {
     $("#latitude").keyup(validateLatitude);
     $("#longitude").keyup(validateLongitude);
+    $("#circuit_number").keyup(validatecircuit_number);
  });
 
 function validateLatitude(){
   var latitude = $("#latitude").val();
   if (latitude >= -90 && latitude <= -1){
      document.getElementById("validation2").innerHTML = "";
-     $("#submit").show();
   }else{
     if (latitude <= 90 && latitude >= 0){
      document.getElementById("validation2").innerHTML = "";
      $("#submit").removeAttr('disabled');
     }else{
      document.getElementById("validation2").innerHTML = "Please enter a value within -90 to 90";
-     $("#submit").attr('disabled', 'disabled')
+     $("#submit").attr('disabled', 'disabled');
    }
   } 
 };
@@ -224,16 +225,28 @@ function validateLongitude(){
   var longitude = $("#longitude").val();
   if (longitude >= -180 && longitude <= -1){
      document.getElementById("validation2").innerHTML = "";
-     $("#submit").show();
-  }else{
+   }else{
     if (longitude <= 180 && longitude >= 0){
      document.getElementById("validation2").innerHTML = "";
      $("#submit").removeAttr('disabled');
     }else{
      document.getElementById("validation2").innerHTML = "Please enter a value within -180 to 180";
-     $("#submit").attr('disabled', 'disabled')
+     $("#submit").attr('disabled', 'disabled');
    }
   } 
 };
 
+function validatecircuit_number(){
+  var circuit_number = $("#circuit_number").val();
+  if (circuit_number >= 0 && circuit_number <= 7){
+     document.getElementById("validation3").innerHTML = "";
+     $("#submit").removeAttr('disabled');
+  }else{
+     document.getElementById("validation3").innerHTML = "Please enter a value within 0 and 7";
+     $("#submit").attr('disabled', 'disabled');
+   }
+ };
+
+
+ 
 </script>
