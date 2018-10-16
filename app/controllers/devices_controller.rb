@@ -37,6 +37,7 @@ class DevicesController < ApplicationController
   def destroy
     @device = Device.find_by(id: params[:id])
     @device.destroy
+    redirect_to :devices
   end
 
   def device_mqtt
