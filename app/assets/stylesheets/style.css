@@ -2,25 +2,17 @@
 @font-face {
     font-family: 'helvetica_neue_lt_std65Md';
     src: url('../assets/helveticaneueltstd-md-webfont.eot');
-    src: url('../assets/helveticaneueltstd-md-webfont.eot?#iefix') format('embedded-opentype'),
-         /*url('../assets/helveticaneueltstd-md-webfont.woff') format('woff'),
-         url('../assets/helveticaneueltstd-md-webfont.ttf') format('truetype'),
-         url*//*('../assets/helveticaneueltstd-md-webfont.svg#helvetica_neue_lt_std65Md') format('svg');*/
+    src: url('../assets/helveticaneueltstd-md-webfont.eot?#iefix');
     font-weight: normal;
     font-style: normal;
-
 }
 
  @font-face {
     font-family: 'helvetica_neue_lt_std55_roman';
     src: url('../assets/helveticaneueltstd-roman-webfont.eot');
-    src: url('../assets/helveticaneueltstd-roman-webfont.eot?#iefix') format('embedded-opentype'),
-        /* url('../assets/helveticaneueltstd-roman-webfont.woff') format('woff'),
-         url('../assets/helveticaneueltstd-roman-webfont.ttf') format('truetype'),
-         url('../assets/helveticaneueltstd-roman-webfont.svg#helvetica_neue_lt_std55_roman') format('svg');*/
+    src: url('../assets/helveticaneueltstd-roman-webfont.eot?#iefix');
     font-weight: normal;
     font-style: normal;
-
 }
 
 
@@ -209,7 +201,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dcdde4', end
 
 #mqttclient .fixed_headers{min-width:inherit;}
 #mqttclient .fixed_headers.three-column th , #mqttclient .fixed_headers.three-column td{width:calc(33% - 10px);}
-#mqttclient .fixed_headers.three-column th {font-weight:normal;}
+#mqttclient .fixed_headers.three-column th {font-weight: normal ;}
 #mqttclient .fixed_headers.three-column th:last-child ,  #mqttclient .fixed_headers.three-column td:last-child {width:33%;}
         /***********************************************
                    DEVICE MANAGEMENT PAGE END
@@ -228,7 +220,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dcdde4', end
 .resume-detail{width:100%; margin-top:10px;height: 176px;}
 .resume-detail ul  li{width:100%;color:#000000; font-size:13px; padding-top:20px;}
 .resume-detail ul  li:nth-child(1){padding-top:0px;}
-.resume-detail ul  li label{color:#000000; font-size:13px; font-weight:normal;padding-right:10px;}
+.resume-detail ul  li label{color:#000000; font-size:13px; font-weight: normal ;padding-right:10px;}
 		/***********************************************
 		          GLOBAL VIEW PAGE END
 		************************************************/
