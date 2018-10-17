@@ -42,7 +42,6 @@ body {
 }
 .login-container .left-section {
     display: table-cell;
-    background-image: url(../assets/login-bg.jpg);
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -229,7 +228,6 @@ button.button-create.device {
     display: table;
     font-size: 15px;
     font-family: 'helvetica_neue_lt_std65Md';
-    background-image: url(../assets/button-add.png);
     background-repeat: no-repeat;
     background-position: 15px center;
     padding: 8px 20px 6px 35px;
