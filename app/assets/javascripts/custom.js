@@ -4,9 +4,9 @@ $( document ).ready(function() {
 (function($){
 			$(window).on("load",function(){
 
-				$.mCustomScrollbar.defaults.scrollButtons.enable=true; //enable scrolling buttons by default
-				$.mCustomScrollbar.defaults.axis="yx"; //enable 2 axis scrollbars by default
-				$(".roundscroll").mCustomScrollbar({theme:"rounded"});
+				// $.mCustomScrollbar.defaults.scrollButtons.enable=true; //enable scrolling buttons by default
+				// $.mCustomScrollbar.defaults.axis="yx"; //enable 2 axis scrollbars by default
+				// $(".roundscroll").mCustomScrollbar({theme:"rounded"});
 
 
 
@@ -26,7 +26,7 @@ $( document ).ready(function() {
 
 //CUSTOM SCROLL
  $(document).ready(function(e) {
-	$(".whtab select.form-control").msDropdown();
+	// $(".whtab select.form-control").msDropdown();
 
 
 // choose file button
