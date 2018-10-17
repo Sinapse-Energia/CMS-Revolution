@@ -306,3 +306,7 @@ span{
   right: 5px;
   color: red;
 }
+
+.email-filed{background-image:url(../assets/user-icon.svg);}
+.password-filed{background-image:url(../assets/password-icon.svg);}
+.msg-filed{background-image:url(../assets/message-icon.svg);}
