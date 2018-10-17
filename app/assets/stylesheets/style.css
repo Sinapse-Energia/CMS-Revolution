@@ -97,7 +97,9 @@ img{max-width:100%;}
 .login-container input.form-control{border:0;border-radius:0; border-bottom:1px solid #d7d7d7; -webkit-box-shadow:none;box-shadow:none; background-repeat:no-repeat; background-position:8px center; height:48px; padding-left:50px;}
 .login-container .login-btn{width:100%;background:#6ebf5d; color:#fff; font-size:15px;font-family: 'helvetica_neue_lt_std65Md'; border-color:#6ebf5d; border-radius:25px;padding: 10px 15px; margin-top:10px; text-transform:uppercase;}
 .login-container .login-btn:hover, .login-container .login-btn:focus{-webkit-box-shadow:none;box-shadow:none; outline:0; background:#f39200;; color:#fff;}
-
+.email-filed{background-image:url(../assets/user-icon.svg);}
+.password-filed{background-image:url(../assets/password-icon.svg);}
+.msg-filed{background-image:url(../assets/message-icon.svg);}
 
 		/***********************************************
                         LOGIN PAGE END
