@@ -53,8 +53,8 @@ server '54.93.72.102',
   user: 'ubuntu',
   roles: %w{web app db},
   ssh_options: {
-    user: 'deploy', # overrides user setting above
-    keys: %w(/home/deploy/.ssh/id_rsa),
+    user: 'ubuntu', # overrides user setting above
+    keys: %w(/home/enbake/.ssh/cms.pem),
     forward_agent: true,
     auth_methods: %w(publickey)
     # password: 'please use keys'
