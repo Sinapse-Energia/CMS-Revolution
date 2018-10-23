@@ -77,3 +77,4 @@ group :development do
   gem 'capistrano3-puma', require: false
   gem 'capistrano-sidekiq', require: false  
 end
+gem 'sinapse_mqtt_client', :path => "/home/enbake/CMS-Revolution/mqtt_gem/sinapse_mqtt_client/" 
