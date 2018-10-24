@@ -1,5 +1,6 @@
 
 # require 'mqtt'
+require 'date'
 class DevicesController < ApplicationController
   before_action :fetch_device, except: [:index, :create, :new]
   before_action :authorize
@@ -14,11 +15,13 @@ class DevicesController < ApplicationController
   end
 
   def create
+    
     @device = Device.new(device_params)
+    @device.date_installation = Date.strptime(device_params[:date_installation], "%m/%d/%Y")
     if @device.save
       redirect_to :devices
     else
-      redirect_to :back
+      redirect_to :devices
     end
   end
 
