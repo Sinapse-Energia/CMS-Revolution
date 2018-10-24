@@ -3,7 +3,6 @@ class ReceiveMqttMessagesJob < ActiveJob::Base
 
   def perform()
     mqtt_client = SinapseMQTTClientSingleton.instance
-   
 
     if mqtt_client.connected? then
    		mqtt_client.receive_messages_from_subscribed_topics do |topic, message|
@@ -12,6 +11,5 @@ class ReceiveMqttMessagesJob < ActiveJob::Base
 		 	# PROCESS the MESSAGE
 			end
     end
-  end  
-		
+  end
 end
