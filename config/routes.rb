@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       post :connect
       post :disconnect
     end
+    get :mqtt_connection_disconnection, on: :collection
   end
   
 end
