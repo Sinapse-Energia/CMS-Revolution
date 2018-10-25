@@ -77,3 +77,4 @@ group :development do
   gem 'capistrano3-puma', require: false
   gem 'capistrano-sidekiq', require: false  
 end
+gem 'sucker_punch', '~> 2.1', '>= 2.1.1'
