@@ -33,7 +33,8 @@ class DevicesController < ApplicationController
   end
 
   def update
-    @device.update(device_params)
+    date = Date.strptime(device_params[:date_installation], "%m/%d/%Y")
+    @device.update(name: device_params[:name] ,id_code: device_params[:id_code] ,id_communication: device_params[:id_communication] ,location: device_params[:location] ,longitude: device_params[:longitude] ,latitude: device_params[:latitude] ,altitude: device_params[:altitude] ,date_installation: date ,circuit_number: device_params[:circuit_number] ,name_street: device_params[:name_street] ,number_street: device_params[:number_street] ,power_installed: device_params[:power_installed] ,power_contracted: device_params[:power_contracted] ,id_supply_contract: device_params[:id_supply_contract] ,clock_brand: device_params[:clock_brand] ,clock_model: device_params[:clock_model] ,user_id: device_params[:user_id])
     redirect_to devices_path
   end
   

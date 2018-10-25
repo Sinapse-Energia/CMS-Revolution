@@ -22,7 +22,7 @@
                           <td><%= device.name %></td>
                           <td><%= device.id_code %></td>
                           <td><%= device.id_communication %></td>
-                          <td><%= device.date_installation %></td>
+                          <td><%= device.date_installation.to_date %></td>
                           <td><%= link_to image_tag('edit-icon.svg'), edit_device_path(id: device.id), remote: true %>
                             <%= link_to image_tag('delete-icon.svg'), device_path(device.id), :method => :delete , remote: true ,data: { confirm: 'Are you sure?'} %>  
                             
