@@ -163,12 +163,12 @@
 </div>
 
 <script type="text/javascript">
-  
 
   $("#picker").datepicker({
-    dateFormat: "dd-mm-yy"
+    Format: "dd-mm-yy",
+    todayBtn: true,
+    autoclose: true
   });
-
 
 var text = document.getElementById('latitude');
   text.onkeypress = text.onpaste = checkInput;
