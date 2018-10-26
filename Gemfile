@@ -78,3 +78,4 @@ group :development do
   gem 'capistrano-sidekiq', require: false  
 end
 # gem 'sinapse_mqtt_client', :path => "/home/enbake/CMS-Revolution/mqtt_gem/sinapse_mqtt_client"
+gem 'sucker_punch', '~> 2.1', '>= 2.1.1'
