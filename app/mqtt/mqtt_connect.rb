@@ -1,8 +1,8 @@
 mqtt_client = SinapseMQTTClientSingleton.instance
-mqtt_client.host = "sinapsemqtt.com"
+mqtt_client.host = "soporte-tecnico.bitnamiapp.com"
 mqtt_client.port = 1883
-mqtt_client.username = "user"
-mqtt_client.password = "password"
+# mqtt_client.username = "user"
+# mqtt_client.password = "password"
 mqtt_client.installation_id = "DEMOSTRADOR"
 mqtt_client.ssl = false
 mqtt_client.keep_alive = 3600
