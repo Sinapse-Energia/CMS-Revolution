@@ -2,7 +2,7 @@ class Mqtt::MqttConnectionController < ApplicationController
 	# before_action :mqtt_params, only: [:connect]
 
 	def connect
-		ap params.permit!
+	  params.permit!
     mqtt_client = SinapseMQTTClientSingleton.instance
 		mqtt_client.host = params[:url].to_s
 		mqtt_client.port = params[:port].to_i
