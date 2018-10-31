@@ -64,6 +64,14 @@ class Mqtt::MqttConnectionController < ApplicationController
 		render json: json_data
 	end
 
+	def get_data
+	   @mqtt = OperationData.last
+	    respond_to do |format|               
+	       format.js
+	       format.html
+	    end 
+	end
+
 	private
 
 	# def mqtt_params

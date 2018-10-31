@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get '/logout', to: "session#logout"
   get '/device_mqtt', to: "devices#device_mqtt"
   get '/create_device', to: "devices#create_device"
-  get '/get_device', to: "devices#get_device" 
+  get '/get_device', to: "devices#get_device"
 
   resources :devices do
     member do
@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     get :disconnect,  on: :collection
     get :publishing,  on: :collection
     get :subscribe,  on: :collection
+    get :get_data,  on: :collection
   end
   
 end

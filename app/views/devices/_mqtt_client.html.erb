@@ -8,7 +8,7 @@
      </ul>
       <div class="tab-content">
         <div id="mqtt" class="container tab-pane active"><br>
-          <%= form_for :mqtt, :url => connect_mqtt_connection_index_path, method: :get do |f| %>
+      <!--     <%= form_for :mqtt, :url => connect_mqtt_connection_index_path, method: :get do |f| %>
             <div class="form-group">
               <div class="row">
                 <div class="col-md-3">
@@ -29,7 +29,8 @@
                 </div>
               </div>
             </div> 
-          <% end %>
+          <% end %> -->
+          <%= link_to 'Get Last Message', get_data_mqtt_connection_index_path, method: :get, remote: true,class: "btn submit-btn-green", style: "margin-top: 20px; float: right" %>
         </div>
       </div>
     </div>
