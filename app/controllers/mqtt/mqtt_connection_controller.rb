@@ -1,9 +1,9 @@
 class Mqtt::MqttConnectionController < ApplicationController
 
 	def connect
-		mqtt_client = SinapseMQTTClientSingleton.instance
-		mqtt_client.host = "soporte-tecnico.bitnamiapp.com"
-		mqtt_client.port = 1883
+	    mqtt_client = SinapseMQTTClientSingleton.instance
+		mqtt_client.host = params[:url].to_s
+		mqtt_client.port = params[:port].to_i
 		# mqtt_client.username = "user"
 		# mqtt_client.password = "password"
 		mqtt_client.installation_id = "DEMOSTRADOR"
@@ -15,7 +15,7 @@ class Mqtt::MqttConnectionController < ApplicationController
 		if mqtt_client.connected?
 			json_data = {"status" => "200", "message" => "you are connected to the mqtt_client"}
 		else
-			json_data = {"status" => "404", "message" => "session timeout please try again"}
+			render partial: '/devices/mqtt_client'
 		end
 		render json: json_data
 	end
