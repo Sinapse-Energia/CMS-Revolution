@@ -1,7 +1,9 @@
 class Mqtt::MqttConnectionController < ApplicationController
+	# before_action :mqtt_params, only: [:connect]
 
 	def connect
-	    mqtt_client = SinapseMQTTClientSingleton.instance
+		ap params.permit!
+    mqtt_client = SinapseMQTTClientSingleton.instance
 		mqtt_client.host = params[:url].to_s
 		mqtt_client.port = params[:port].to_i
 		# mqtt_client.username = "user"
@@ -15,7 +17,18 @@ class Mqtt::MqttConnectionController < ApplicationController
 		if mqtt_client.connected?
 			json_data = {"status" => "200", "message" => "you are connected to the mqtt_client"}
 		else
-			render partial: '/devices/mqtt_client'
+			json_data = {"status" => "404", "message" => "unable to connected to the mqtt_client"}
+		end
+		render json: json_data
+	end
+
+	def disconnect
+		mqtt_client = SinapseMQTTClientSingleton.instance
+		if mqtt_client.connected?
+			mqtt_client.disconnect
+			json_data = {"status" => "200", "message" => "you are disconnected to the mqtt_client"}
+		else
+			json_data = {"status" => "404", "message" => "not connected with any mqtt_client"}
 		end
 		render json: json_data
 	end
@@ -50,5 +63,11 @@ class Mqtt::MqttConnectionController < ApplicationController
 		end
 		render json: json_data
 	end
+
+	private
+
+	# def mqtt_params
+	# 	params.require(:mqtt).permit!
+	# end
 
 end

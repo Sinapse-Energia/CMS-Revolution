@@ -8,56 +8,57 @@
      </ul>
       <div class="tab-content">
         <div id="mqtt" class="container tab-pane active"><br>
-          <%= form_tag("/mqtt_connection/connect", method: "get") do %>
-           <div class="form-group">
-                <div class="row">
-                  <div class="col-md-3">
-                   
-                    <input class="form-control url" placeholder="URL" type="text" id="url">
-                    <span id="inputtext" class="clearBtn" style="float: left;"></span>
-                  </div>
-                  <div class="col-md-3">
-                    
-                    <input class="form-control port" placeholder="PORT" type="text" id="port">
-                    <span id="inputtext" class="clearBtn" style="float: left;"></span>
-                  </div>
-                   <div class="col-md-3">
-<button>check</button>
-                      
-                   </div>
-                    <div class="col-md-3">
-                        <%= button_to 'Disconnect', create_device_path, method: :get, remote: true,class: "btn disconnect device-submit btn-right" %>
-                    </div>
+          <%= form_for :mqtt, :url => connect_mqtt_connection_index_path, method: :get do |f| %>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-3">
+                  <%= f.text_field :url, class: 'form-control', placeholder: 'Host url', required: true %>
                 </div>
+                <div class="col-md-3">
+                  <%= f.text_field :port, class: 'form-control', placeholder: 'Port number', required: true %>
+                </div>
+                <div class="col-md-3 submit-show">
+                  <%= f.submit "connect" ,class: "btn connect device-submit btn-right" %>
+                </div>
+                <div class="col-md-3 subscribe-show">
+                  <%= button_to 'subscribe', subscribe_mqtt_connection_index_path, method: :get, remote: true,class: "btn connect device-subscribe btn-right" %>
+                </div>
+                <div class="col-md-3">
+                  <%= link_to 'Disconnect', subscribe_mqtt_connection_index_path, method: :get, remote: true,class: "btn disconnect device-disconnect dis-true btn-right", style: "margin-top: 20px;", disabled: true %>
+                  <%= link_to 'Disconnect', subscribe_mqtt_connection_index_path, method: :get, remote: true,class: "btn disconnect device-disconnect dis-false btn-right" %>
+                </div>
+              </div>
             </div> 
-            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
 </div>
-<script type="text/javascript">
-function vald(){
-          port = $('.port').val();
-          url = $('.url').val();
-      $.ajax({
-                  url: "/mqtt_connection/connect",
-                  type:"get",
-                  dataType: "json",
-                  data:{
-                      status: true,
-                      port: port,
-                       url:url
-                    
-                  },
-                  success: function(response) {
-                                  $('#myid1').hide();
-                  $('#myid2').show();
-                  }
-              });
-   
 
-   
-   }
-   
+<script type="text/javascript">
+  $(".device-submit").on("click",function(){
+    localStorage.setItem("mqtt_url", $('#mqtt_url').val());
+    localStorage.setItem("mqtt_port", $('#mqtt_port').val());
+  });
+
+  if(localStorage["mqtt_port"] != undefined || localStorage["mqtt_url"] != undefined){
+    $('#mqtt_url').val(localStorage["mqtt_url"]);
+    $('#mqtt_port').val(localStorage["mqtt_port"]);
+    $(".submit-show").hide();
+    $(".dis-false").show();
+    $(".dis-true").hide();
+  }else{
+    $(".dis-true").show();
+    $(".dis-false").hide();
+    $(".submit-show").show();
+    $(".subscribe-show").hide();
+  }
+
+  $(".device-disconnect").on("click",function(){
+    localStorage.clear("mqtt_url")
+    localStorage.clear("mqtt_port")
+    $(".submit-show").show();
+    $(".subscribe-show").hide();
+  })
 </script>

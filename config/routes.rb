@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   resources "mqtt_connection", module: "mqtt"  do        
     get :connect,  on: :collection
+    get :disconnect,  on: :collection
     get :publishing,  on: :collection
     get :subscribe,  on: :collection
   end
