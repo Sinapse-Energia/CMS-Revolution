@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:ralcaide/sinapse_mqtt_client.git
+  remote: https://github.com/ralcaide/sinapse_mqtt_client.git
   revision: aae11f64ea0cf249cb9c6a531e5cf6c4fb450c20
   specs:
     sinapse_mqtt_client (0.5.0)
