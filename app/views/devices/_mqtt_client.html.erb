@@ -8,7 +8,7 @@
      </ul>
       <div class="tab-content">
         <div id="mqtt" class="container tab-pane active"><br>
-      <!--     <%= form_for :mqtt, :url => connect_mqtt_connection_index_path, method: :get do |f| %>
+          <%= form_for :mqtt, :url => connect_mqtt_connection_index_path, method: :get , remote: true do |f| %>
             <div class="form-group">
               <div class="row">
                 <div class="col-md-3">
@@ -21,15 +21,15 @@
                   <%= f.submit "connect" ,class: "btn connect device-submit btn-right" %>
                 </div>
                 <div class="col-md-3 subscribe-show">
-                  <%= button_to 'subscribe', subscribe_mqtt_connection_index_path, method: :get, remote: true,class: "btn connect device-subscribe btn-right" %>
+                  <%= link_to 'subscribe', subscribe_mqtt_connection_index_path, method: :get,remote: true,class: "btn subscribe device-subscribe btn-right" %>
                 </div>
                 <div class="col-md-3">
-                  <%= link_to 'Disconnect', subscribe_mqtt_connection_index_path, method: :get, remote: true,class: "btn disconnect device-disconnect dis-true btn-right", style: "margin-top: 20px;", disabled: true %>
-                  <%= link_to 'Disconnect', subscribe_mqtt_connection_index_path, method: :get, remote: true,class: "btn disconnect device-disconnect dis-false btn-right" %>
+                  <%= link_to 'Disconnect', disconnect_mqtt_connection_index_path, method: :get,remote: true,class: "btn disconnect device-disconnect dis-true btn-right", style: "margin-top: 20px;", disabled: true %>
+                  <%= link_to 'Disconnect', disconnect_mqtt_connection_index_path, method: :get,remote: true,class: "btn disconnect device-disconnect dis-false btn-right" %>
                 </div>
               </div>
             </div> 
-          <% end %> -->
+          <% end %>
           <%= link_to 'Get Last Message', get_data_mqtt_connection_index_path, method: :get, remote: true,class: "btn submit-btn-green", style: "margin-top: 20px; float: right" %>
         </div>
       </div>
@@ -43,12 +43,17 @@
     localStorage.setItem("mqtt_port", $('#mqtt_port').val());
   });
 
-  if(localStorage["mqtt_port"] != undefined || localStorage["mqtt_url"] != undefined){
+  if(localStorage["mqtt_port"] != undefined || localStorage["subscribe"] != undefined || localStorage["mqtt_url"] != undefined){
     $('#mqtt_url').val(localStorage["mqtt_url"]);
     $('#mqtt_port').val(localStorage["mqtt_port"]);
     $(".submit-show").hide();
     $(".dis-false").show();
     $(".dis-true").hide();
+    $('#mqtt_url').attr("disabled","disabled");
+    $('#mqtt_port').attr("disabled","disabled");
+    $(".subscribe").on("click",function(){
+      localStorage.setItem("subscribe", true);
+    });
   }else{
     $(".dis-true").show();
     $(".dis-false").hide();
@@ -56,9 +61,14 @@
     $(".subscribe-show").hide();
   }
 
+  if(localStorage["subscribe"] != undefined){
+    $(".subscribe").attr("disabled","disabled");
+  }
+
   $(".device-disconnect").on("click",function(){
     localStorage.clear("mqtt_url")
     localStorage.clear("mqtt_port")
+    localStorage.clear("subscribe")
     $(".submit-show").show();
     $(".subscribe-show").hide();
   })

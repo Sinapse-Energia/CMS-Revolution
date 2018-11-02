@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     get :publishing,  on: :collection
     get :subscribe,  on: :collection
     get :get_data,  on: :collection
+    get :back,  on: :collection
   end
   
 end

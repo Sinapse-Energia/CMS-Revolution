@@ -143,6 +143,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dcdde4', end
 .connect:active{background-image: url(../images/wifi-connect.png);  }
 .connect:hover, .connect:focus{-webkit-box-shadow:none;box-shadow:none;outline: 0;background-color: #6ebf5d;     color: #fff;}
 .connect span{content:"";width:21px; height:21px; display:inline-block; margin-right:5px; background:url(../images/wifi-connect.png) no-repeat;position: relative;top: 5px;}
+.subscribe{background-color:#6ebf5d; color:#fff; border-radius:20px;  text-align:center; padding:7px 25px 5px 54px;text-transform:uppercase; font-size:15px;font-family: 'helvetica_neue_lt_std65Md'; background-image: url(../images/wifi-connect.png);     background-repeat: no-repeat;     background-position: 25px center;}
+.subscribe:active{background-image: url(../images/wifi-connect.png);  }
+.subscribe:hover, .subscribe:focus{-webkit-box-shadow:none;box-shadow:none;outline: 0;background-color: #6ebf5d;     color: #fff;}
+.subscribe span{content:"";width:21px; height:21px; display:inline-block; margin-right:5px; background:url(../images/wifi-connect.png) no-repeat;position: relative;top: 5px;}
 .disconnect{background-color:#f5841f; color:#fff; border-radius:20px;  text-align:center; padding:7px 25px 5px 54px;text-transform:uppercase; font-size:15px;font-family: 'helvetica_neue_lt_std65Md'; background-image: url(../images/wifi-disconnect.png);     background-repeat: no-repeat;     background-position: 25px center;}
 .disconnect:active{background-image: url(../images/wifi-disconnect.png);  }
 .disconnect:hover, .disconnect:focus{-webkit-box-shadow:none;box-shadow:none;outline: 0;background-color: #f39200;     color: #fff;}

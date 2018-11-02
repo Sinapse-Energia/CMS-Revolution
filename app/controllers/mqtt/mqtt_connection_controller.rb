@@ -1,11 +1,10 @@
 class Mqtt::MqttConnectionController < ApplicationController
-	# before_action :mqtt_params, only: [:connect]
+	before_action :mqtt_params, only: [:connect]
 
 	def connect
-	  params.permit!
     mqtt_client = SinapseMQTTClientSingleton.instance
-		mqtt_client.host = params[:url].to_s
-		mqtt_client.port = params[:port].to_i
+		mqtt_client.host = params[:mqtt][:url].to_s
+		mqtt_client.port = params[:mqtt][:port].to_i
 		# mqtt_client.username = "user"
 		# mqtt_client.password = "password"
 		mqtt_client.installation_id = "DEMOSTRADOR"
@@ -19,7 +18,9 @@ class Mqtt::MqttConnectionController < ApplicationController
 		else
 			json_data = {"status" => "404", "message" => "unable to connected to the mqtt_client"}
 		end
-		render json: json_data
+		respond_to do |format|
+      format.js {}
+    end
 	end
 
 	def disconnect
@@ -30,7 +31,9 @@ class Mqtt::MqttConnectionController < ApplicationController
 		else
 			json_data = {"status" => "404", "message" => "not connected with any mqtt_client"}
 		end
-		render json: json_data
+		respond_to do |format|
+      format.js {}
+    end
 	end
 
 	def publishing
@@ -61,21 +64,29 @@ class Mqtt::MqttConnectionController < ApplicationController
 		else
 			json_data = {"status" => "404", "message" => "unable to subscribe please try again"}
 		end
-		render json: json_data
+		respond_to do |format|
+      format.js {}
+    end
 	end
 
 	def get_data
-	   @mqtt = OperationData.last
-	    respond_to do |format|               
-	       format.js
-	       format.html
-	    end 
+   @mqtt = OperationData.last
+    respond_to do |format|
+       format.js
+       format.html
+    end
+	end
+
+	def back
+		respond_to do |format|
+      format.js
+    end
 	end
 
 	private
 
-	# def mqtt_params
-	# 	params.require(:mqtt).permit!
-	# end
+	def mqtt_params
+		params.permit!
+	end
 
 end

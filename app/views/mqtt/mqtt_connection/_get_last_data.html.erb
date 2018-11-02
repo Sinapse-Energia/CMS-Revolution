@@ -1,4 +1,3 @@
-
 <div class="middle-container">
       <div class="panel panel-primary">
               <div class="panel-heading">
@@ -45,16 +44,15 @@
                   </table>
                  <% end %>
                 </div>
-                <%= button_to 'Back', devices_path, method: :get,  class: "btn submit-btn-green device-submit btn-right" %>
-       </div>
-           
-    </div>   
+                <%= link_to 'Back', back_mqtt_connection_index_path, method: :get,remote: true,class: "btn submit-btn-green device-submit btn-right" %>
+                <%#= button_to 'Back', devices_path, method: :get,  class: "btn submit-btn-green device-submit btn-right" %>
+       </div> 
+    </div>
     
 <script type="text/javascript">
     $(document).ready(function() {
         var table = $('#table-data').DataTable({
             responsive: true
         });
-     
-    } ); 
+    } );
 </script>
