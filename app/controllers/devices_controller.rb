@@ -15,13 +15,20 @@ class DevicesController < ApplicationController
   end
 
   def create
-    
+    params.permit!    
     @device = Device.new(device_params)
     @device.date_installation = Date.strptime(device_params[:date_installation], "%m/%d/%Y")
-    if @device.save
-      redirect_to :devices
+    duplicate_device_id_code = Device.find_by(id_code: device_params[:id_code])
+    duplicate_device_id_communication = Device.find_by(id_communication: device_params[:id_communication])
+    if duplicate_device_id_code.present? || duplicate_device_id_communication.present?
+      # flash[:notice] = "Duplicate device id communication or Duplicate device id code"
+      redirect_to :devices, :flash => { :notice => "Duplicate device id communication or Duplicate device id code" }
     else
-      redirect_to :devices
+      if @device.save
+        redirect_to :devices
+      else
+        redirect_to :devices
+      end
     end
   end
 
@@ -33,7 +40,14 @@ class DevicesController < ApplicationController
   end
 
   def update
-    date = Date.strptime(device_params[:date_installation], "%m/%d/%Y")
+    params.permit!
+    split_date = device_params[:date_installation].split(" ")[0]
+    split_date1 = device_params[:date_installation].split("/")
+    if split_date1.count == 3
+      date = Date.strptime(device_params[:date_installation], "%m/%d/%Y")
+    else
+      date = Date.strptime(split_date, "%Y-%m-%d")
+    end
     @device.update(name: device_params[:name] ,id_code: device_params[:id_code] ,id_communication: device_params[:id_communication] ,location: device_params[:location] ,longitude: device_params[:longitude] ,latitude: device_params[:latitude] ,altitude: device_params[:altitude] ,date_installation: date ,circuit_number: device_params[:circuit_number] ,name_street: device_params[:name_street] ,number_street: device_params[:number_street] ,power_installed: device_params[:power_installed] ,power_contracted: device_params[:power_contracted] ,id_supply_contract: device_params[:id_supply_contract] ,clock_brand: device_params[:clock_brand] ,clock_model: device_params[:clock_model] ,user_id: device_params[:user_id])
     redirect_to devices_path
   end
