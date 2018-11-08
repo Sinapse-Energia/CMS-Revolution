@@ -7,6 +7,8 @@ class DevicesController < ApplicationController
   
   def index
     @devices = Device.where(user_id: current_user.id)
+    @publish_message = PublishMessage.where(user_id: current_user.id)
+    @subscribe_topic = SubscribeTopic.where(user_id: current_user.id)
   end
 
   def new

@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12">
+    <div class="panel-box">
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#mqtt_publish">MQTT Publication</a>
+        </li>
+     </ul>
+      <div class="tab-content">
+        <div id="mqtt_publish" class="container tab-pane active" style="padding-right: 80px;"><br>
+          <%= form_for :mqtt_publish, :url => publishing_mqtt_connection_index_path, method: :get , remote: true do |f| %>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-1">
+                  <h6><b>Topic:</b></h6>
+                </div>
+                <div class="col-md-7">
+                  <%= f.text_field :topic, class: 'form-control', placeholder: 'Topic', required: true %>
+                </div>
+                <div class="col-md-4 submit-show" style="padding-right: 12%">
+                  <%= f.submit "Publish" ,class: "btn connect publish btn-right" %>
+                </div>
+                <div class="row">
+                  <div class="col-md-1">
+                  <h6><b>Message:</b></h6>
+                  </div>
+                  <div class="col-md-7" style="padding-left: 30px;">
+                    <%= f.text_field :message, class: 'form-control', placeholder: 'Message', required: true %>
+                  </div>
+                </div>
+              </div>
+            </div> 
+          <% end %>
+          <br><br>
+          <hr style="height:1px;border:none;color:#333;background-color:#333;">
+          <center><h2><b>Last messages published</b></h2></center>
+          <hr style="height:1px;border:none;color:#333;background-color:#333;">
+          <br><br>
+          <div class="publish_message_board">
+            <%= render partial: 'devices/publish_table', locals: {publish_message: @publish_message} %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
