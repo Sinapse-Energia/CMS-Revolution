@@ -1,0 +1,113 @@
+	    <div class="top-panel">
+		   <div class="container-fluid">
+		      <div class="row">
+			      <div class="col-xs-12 col-sm-6">
+				      <div class="page-title">Profile</div>
+				  </div>
+				  <div class="col-xs-12 col-sm-6">
+				      <div class="page-breadcrumbs">
+					     <ul>
+						    <li><a href="#">User / Profile</a></li>
+						 </ul>
+					  </div>
+				  </div>
+			  </div>
+		   </div>
+		</div>
+		<div class="middle-container">
+		   <div class="container-fluid">
+		        <div class="row">
+				    <div class="col-xs-12 col-sm-12">
+					    <div class="panel-box">
+						    <div class="panel-head">
+							   <h2>Edit Profile</h2>
+							</div>
+							<div class="profileform-section">
+								  <%= form_for(@user, url: '/update',html: { class: 'form-horizontal', multipart: true, method: :put }) do |f| %>
+									<div class="row">
+								     <div class="col-xs-12 col-sm-6">
+									    <div class="form-group">
+											<div class="col-xs-12">
+                        						<%= f.text_field :first_name, class: 'form-control email-filed', required: true, placeholder: "First Name" %>
+											</div>
+										  </div>
+									 </div>
+									 <div class="col-xs-12 col-sm-6">
+									    <div class="form-group">
+											<div class="col-xs-12">
+											    <%= f.text_field :last_name, class: 'form-control email-filed', required: true, placeholder: "Last Name" %>
+											</div>
+										</div>
+									 </div>
+									 <div class="col-xs-12 col-sm-6">
+									    <div class="form-group">
+											<div class="col-xs-12">
+						                        <%= f.email_field :email, class: "form-control msg-filed", required: true, placeholder: "Email Address", readonly: true %>
+						                       <%= f.hidden_field :id %>
+        									</div>
+										</div>
+									 </div>
+
+									 <div class="col-xs-12 col-sm-6">
+ 										 <div class="form-group">
+ 										 <div class="col-xs-12">
+ 											 <em>(we need your current password to confirm your changes)</em>
+ 											 <%= f.password_field :current_password, autocomplete: "off", class: 'form-control password-filed', required: true, placeholder: 'Current Password', required: true %>
+ 										 </div>
+ 									 </div>
+ 									</div>
+
+									 <div class="col-xs-12 col-sm-6">
+										 <div class="form-group">
+										 <div class="col-xs-12">
+												<%= f.password_field :password, class: 'form-control password-filed', required: true, placeholder: 'Password' %>
+										 </div>
+									 </div>
+									</div>
+
+									<div class="col-xs-12 col-sm-6">
+										 <div class="form-group">
+										 <div class="col-xs-12">
+											 <%= f.password_field :password_confirmation, class: 'form-control password-filed', required: true, placeholder: 'Confirm Password' %>
+										 </div>
+									 </div>
+									</div>
+
+
+
+									<!-- <div class="col-xs-12 col-sm-6">
+										 <div class="pull-left">
+											 <div class="title-label">Profile Picture </div>
+									 </div>
+ -->
+
+										 <!-- <div class="imageupload">
+											 <div class="file-tab panel-body">
+
+											 <label class="btn btn-default btn-file">
+												 <span>Browse</span>
+												
+												 <%= f.file_field :avatar %>
+											 </label>
+											 <button type="button" class="btn btn-default">Remove</button>
+										 </div>
+									 </div> -->
+									<!-- </div> -->
+
+									 <div class="col-xs-12">
+									    <div class="form-group">
+											<div class="col-xs-12 text-center">
+											  <button type="submit" class="btn submit-btn-green">Submit</button>
+											</div>
+										</div>
+									 </div>
+								  </div>
+							 <% end %>
+
+							</div>
+						</div>
+					</div>
+				</div>
+		   </div>
+		</div>
+	    <div class="clear"></div>

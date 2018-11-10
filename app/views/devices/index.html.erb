@@ -14,12 +14,10 @@
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <!-- <li>
-                        <a href="#">
-                          <i class="fa fa-user fa-fw"></i>
-                          User Profile</a>
-                    </li>
                     <li>
+                      <%= link_to " User Profile", edit_session_path(current_user.id) ,  remote: true , :class => "fa fa-user fa-fw" %>
+                    </li>
+                    <!-- <li>
                         <a href="#">
                             <i class="fa fa-gear fa-fw"></i>
                             Settings</a>

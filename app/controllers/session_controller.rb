@@ -78,6 +78,26 @@ end
     cookies[:token] = nil
     redirect_to root_path
   end
+
+  def edit
+       @user = User.find_by(id: params[:id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+def update
+  @user = User.find_by(id: params[:user][:id])
+    if  @user && @user.authenticate(params[:user][:current_password])
+   
+        if params[:user][:password] == params[:user][:password_confirmation]
+           @user.update!(user_params)
+          
+        end 
+    end
+   redirect_to devices_path
+end  
+
   private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :password, :phone, :user_name)
