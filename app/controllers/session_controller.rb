@@ -1,5 +1,6 @@
 class SessionController < ApplicationController
   skip_before_action :verify_authenticity_token
+  
 	def index
   end
 def new
@@ -91,12 +92,16 @@ def update
     if  @user && @user.authenticate(params[:user][:current_password])
    
         if params[:user][:password] == params[:user][:password_confirmation]
-           @user.update!(user_params)
+           @user.update!(user_update_params)
           
         end 
     end
    redirect_to devices_path
 end  
+  protected
+  def user_update_params
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :phone, :user_name, :avatar)
+  end
 
   private
   def user_params
