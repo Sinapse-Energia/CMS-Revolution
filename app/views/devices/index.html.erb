@@ -9,17 +9,20 @@
             <li class="userdp dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <span class="user-profile">
-                      <img src="/images/missing_user.png" alt="Missing user">
+                      
+                      <% if current_user.avatar.url(:thumb) == "/assets/missing_device.png" %>
+                        <img src="/images/missing_user.png" alt="Missing user">
+                      <% else %>
+                       <%= image_tag(current_user.avatar.url(:thumb)) %>
+                       <% end %>
                     </span>
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <!-- <li>
-                        <a href="#">
-                          <i class="fa fa-user fa-fw"></i>
-                          User Profile</a>
-                    </li>
                     <li>
+                      <%= link_to " User Profile", edit_session_path(current_user.id) ,  remote: true , :class => "fa fa-user fa-fw" %>
+                    </li>
+                    <!-- <li>
                         <a href="#">
                             <i class="fa fa-gear fa-fw"></i>
                             Settings</a>
