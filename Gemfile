@@ -36,6 +36,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'jquery-rails'
 gem 'jquery-datatables'
+gem 'rmagick', '~> 2.16'
 gem 'paperclip', '~> 4.1'
 
 # Use Capistrano for deployment
