@@ -80,20 +80,19 @@ end
   end
 
   def edit
-       @user = User.find_by(id: params[:id])
+    @user = User.find_by(id: params[:id])
     respond_to do |format|
       format.js
     end
   end
 
 def update
+  params.permit!
   @user = User.find_by(id: params[:user][:id])
     if  @user && @user.authenticate(params[:user][:current_password])
-   
-        if params[:user][:password] == params[:user][:password_confirmation]
-           @user.update!(user_update_params)
-          
-        end 
+      # if params[:user][:password] == params[:user][:password_confirmation]
+        @user.update!(user_update_params)
+      # end 
     end
    redirect_to devices_path
 end  

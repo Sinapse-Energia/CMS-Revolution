@@ -6,8 +6,8 @@ module DevicesHelper
 
   def tab_list
     [
-      ['globalview', 'Global View'],
-      ['mqttclient', 'MQTT Client'],
+      ['globalview', 'Actuator'],
+      ['mqttclient', 'Monitor'],
       ['management', 'Management']
     ]
   end
