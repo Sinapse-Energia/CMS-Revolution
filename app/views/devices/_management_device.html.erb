@@ -12,7 +12,7 @@
         </ul>
         <div class="tab-content">
           <div id="mqtt" class="container tab-pane active"><br>
-
+            <%= render partial: 'mqtt_client' %>
           </div>
           <div id="devices" class="container tab-pane fade"><br>
             <%= render partial: 'devices/get_all_devices', locals: {device: @device} %>
