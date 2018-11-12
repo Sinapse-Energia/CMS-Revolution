@@ -7,21 +7,13 @@
     </tr>
   </thead>
   <tbody style="height:100px;">
-    <tr>
-      <td>Demo 1</td>
-      <td>Demo 1</td>
-      <td>Demo 1</td>
-    </tr>
-    <tr>
-      <td>Demo 2</td>
-      <td>Demo 2</td>
-      <td>Demo 2</td>
-    </tr>
-    <tr>
-      <td>Demo 3</td>
-      <td>Demo 3</td>
-      <td>Demo 3</td>
-    </tr>
+    <% devices.each do |device| %>
+      <tr>
+        <td><%= device.name %></td>
+        <td><%= device.id_code %></td>
+        <td><%= device.id_communication %></td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
 

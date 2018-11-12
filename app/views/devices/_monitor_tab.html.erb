@@ -9,7 +9,7 @@
       <div class="tab-content">
         <div id="real_time_monitor" class="container tab-pane active" style="padding-right: 80px;"><br>
           <div class="monitor_data">
-            <%= render partial: 'devices/monitor_table', locals: {publish_message: @publish_message, subscribe_topic: @subscribe_topic} %>
+            <%= render partial: 'devices/monitor_table', locals: {publish_message: @publish_message, devices: @devices} %>
           </div>
         </div>
       </div>

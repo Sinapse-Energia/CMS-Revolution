@@ -56,25 +56,17 @@
     $(".dis-true").hide();
     $('#mqtt_url').attr("disabled","disabled");
     $('#mqtt_port').attr("disabled","disabled");
-    $(".subscribe").on("click",function(){
-      localStorage.setItem("subscribe", true);
-    });
   }else{
     $(".dis-true").show();
     $(".dis-false").hide();
     $(".submit-show").show();
-    $(".subscribe-show").hide();
   }
 
-  if(localStorage["subscribe"] != undefined){
-    $(".subscribe").attr("disabled","disabled");
-  }
 
   $(".device-disconnect").on("click",function(){
     localStorage.clear("mqtt_url")
     localStorage.clear("mqtt_port")
     localStorage.clear("subscribe")
     $(".submit-show").show();
-    $(".subscribe-show").hide();
   })
 </script>
