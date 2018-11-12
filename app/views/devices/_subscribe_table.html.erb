@@ -1,0 +1,46 @@
+<table id= "table-data"   class="table table-condensed table-striped table-bordered nowrap" width="100%">
+  <thead>
+    <tr>
+      <th>Topic</th>
+    </tr>
+  </thead>
+  <tbody style="height:100px;">
+    <% subscribe_topic.each do |subscribe| %>
+      <tr>
+        <td><%= subscribe.topic %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br><br>
+<hr style="height:1px;border:none;color:#333;background-color:#333;margin-top: 11px;">
+<center><h2><b>Last messages received</b></h2></center>
+<hr style="height:1px;border:none;color:#333;background-color:#333;">
+<br><br>
+<table id= "table-data"   class="table table-condensed table-striped table-bordered nowrap" width="100%">
+  <thead>
+    <tr>
+      <th>Topic</th>
+      <th>Message</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody style="height:100px;">
+    <% publish_message.each do |publish| %>
+      <tr>
+        <td><%= publish.topic %></td>
+        <td><%= publish.message %></td>
+        <td><%= publish.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var table = $('#table-data').DataTable({
+        responsive: true
+    });
+  } );
+</script>

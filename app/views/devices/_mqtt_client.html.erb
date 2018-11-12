@@ -1,79 +1,29 @@
 <div class="row">
-  <div class="col-xs-12 col-sm-12">
+  <div class="col-md-12 col-sm-12">
     <div class="panel-box">
-      <div class="panel-head">
-        <h2>MQTT Broker</h2>
-      </div>
-      <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-12">
-          <div class="MQTT-Client-form">
-            <%= form_for device.mqtt_broker, url: "/devices/#{device.id}/connect", method: 'POST', html: {class: 'mqtt-form', id: 'mqtt_frm'} do |f| %>
-              <%= hidden_field_tag "mqtt_broker[client_id]", device.client_id %>
-              <%= hidden_field_tag "mqtt_broker[topic]", device.topic %>
-              <div class="form-group">
-                <div class="row">
-                  <div class="col-lg-6 col-md-12 col-sm-12 mb-xs-15">
-                    <%= f.text_field :host, class: 'form-control mqtt-pd', placeholder: "URL" %>
-                  </div>
-                  <div class="col-lg-6 col-md-12 col-sm-12 mb-xs-15">
-                    <%= f.text_field :port, class: 'form-control mqtt-pd', placeholder: "PORT" %>
-                  </div>
-                  <div class="col-lg-6 col-md-12 col-sm-12 mb-xs-15">
-                    <%= f.text_field :username, class: 'form-control mqtt-pd', placeholder: "User" %>
-                  </div>
-                  <div class="col-lg-6 col-md-12 col-sm-12 mb-xs-15">
-                    <%= f.password_field :password, class: 'form-control mqtt-pd', placeholder: "Password" %>
-                  </div>
-                </div>
-              </div>
-              <input type="hidden" id='conn_type'/>
-            <% end %>
-          </div>
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#client">Client</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#publication">Publications</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#subscription">Subscriptions</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div id="client" class="container tab-pane active"><br>
+          <%= render partial: 'devices/mqtt_client_tab' %>
         </div>
-        <div class="col-md-6 col-sm-6 col-xs-12">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="buttons">
-                <div class="disconnnect-button dbtn">
-                  <div class="desable-button">
-                    <%= link_to '', onclick: "connectMqtt_device($(this))", 'data-id' => device.id, remote: true do %>
-                      <span class="c-btn-icn">
-                        <img src="../assets/wifi-disconnect.png" alt="...">
-                      </span>
-                      <span class="c-btn-txt">disconnect</span>
-                    <% end %>
-                  </div>
-                </div>
-                <div class="connnect-button dbtn">
-                  <div class="desable-button">
-                    <%= link_to '', onclick: "connectMqtt_device($(this))", class: 'device-connect', 'data-id' => device.id, remote: true do %>
-                      <span class="c-btn-icn"><img src="../assets/wifi-connect.png" alt=".">
-                      </span>
-                      <span class="c-btn-txt">connect</span>
-                    <% end %>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <h4>Status</h4>
-              <div class="status">
-                <div class="status-area status-center">
-                  <h2>
-                    <% if device.mqtt_broker.connected %>
-                      Connected
-                    <% else %>
-                      Disconnected
-                    <% end %>
-                  </h2>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div id="publication" class="container tab-pane fade"><br>
+          <%= render partial: 'devices/mqtt_publication_tab' %>
         </div>
+        <div id="subscription" class="container tab-pane fade"><br>
+          <%= render partial: 'devices/mqtt_subscription_tab' %>
+        </div>
+      <div></div>
       </div>
     </div>
   </div>
 </div>
-<%= render partial: 'devices/device_message', locals: {device: @device, message: @message, topic: @topic} %>
-

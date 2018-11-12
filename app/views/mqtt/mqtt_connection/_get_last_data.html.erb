@@ -1,0 +1,58 @@
+<div class="middle-container">
+      <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h2>MQTT</h2>
+              </div>
+              <div class="panel-body">
+                 <% if @mqtt.present? %>
+                  <table id= "table-data"   class="table table-condensed table-striped table-bordered nowrap" width="100%">
+                    <tbody style="height:100px;">
+                        <tr><th>I1</th><td><%= @mqtt.I1 %></td></tr>
+                        <tr><th>I2</th><td><%= @mqtt.I2 %></td></tr>
+                        <tr><th>I3</th><td><%= @mqtt.I3 %></td></tr>
+                        <tr><th>IN</th><td><%= @mqtt.IN %></td></tr>
+                        <tr><th>U12</th><td><%= @mqtt.U12 %></td></tr>
+                        <tr><th>U23</th><td><%= @mqtt.U23 %></td></tr>
+                        <tr><th>U32</th><td><%= @mqtt.U32 %></td></tr>
+                        <tr><th>V1N</th><td><%= @mqtt.V1N %></td></tr>
+                        <tr><th>V2N</th><td><%= @mqtt.V2N %></td></tr>
+                        <tr><th>V3N</th><td><%= @mqtt.V3N %></td></tr>
+                        <tr><th>P1</th><td><%= @mqtt.P1 %></td></tr>
+                        <tr><th>P2</th><td><%= @mqtt.P2 %></td></tr>
+                        <tr><th>P3</th><td><%= @mqtt.P3 %></td></tr>
+                        <tr><th>Q1</th><td><%= @mqtt.Q1 %></td></tr>
+                        <tr><th>Q2</th><td><%= @mqtt.Q2 %></td></tr>
+                        <tr><th>Q3</th><td><%= @mqtt.Q3 %></td></tr>
+                        <tr><th>FDP1</th><td><%= @mqtt.FDP1 %></td></tr>
+                        <tr><th>FDP2</th><td><%= @mqtt.FDP2 %></td></tr>
+                        <tr><th>FDP3</th><td><%= @mqtt.FDP3 %></td></tr>
+                        <tr><th>FDPS1</th><td><%= @mqtt.FDPS1 %></td></tr>
+                        <tr><th>FDPS2</th><td><%= @mqtt.FDPS2 %></td></tr>
+                        <tr><th>FDPS3</th><td><%= @mqtt.FDPS3 %></td></tr>
+                        <tr><th>EP1</th><td><%= @mqtt.EP1 %></td></tr>
+                        <tr><th>EP2</th><td><%= @mqtt.EP2 %></td></tr>
+                        <tr><th>EP3</th><td><%= @mqtt.EP3 %></td></tr>
+                        <tr><th>EQ1</th><td><%= @mqtt.EQ1 %></td></tr>
+                        <tr><th>EQ2</th><td><%= @mqtt.EQ2 %></td></tr>
+                        <tr><th>EQ3</th><td><%= @mqtt.EQ3 %></td></tr>
+                        <tr><th>ES1</th><td><%= @mqtt.ES1 %></td></tr>
+                        <tr><th>ES2</th><td><%= @mqtt.ES2 %></td></tr>
+                        <tr><th>ES3</th><td><%= @mqtt.ES3 %></td></tr>
+                        <tr><th>F</th><td><%= @mqtt.F %></td></tr>
+                        <tr><th>TIMESTAMP</th><td><%= @mqtt.TIMESTAMP %></td></tr>
+                    </tbody>
+                  </table>
+                 <% end %>
+                </div>
+                <%= link_to 'Back', back_mqtt_connection_index_path, method: :get,remote: true,class: "btn submit-btn-green device-submit btn-right" %>
+                <%#= button_to 'Back', devices_path, method: :get,  class: "btn submit-btn-green device-submit btn-right" %>
+       </div> 
+    </div>
+    
+<script type="text/javascript">
+    $(document).ready(function() {
+        var table = $('#table-data').DataTable({
+            responsive: true
+        });
+    } );
+</script>

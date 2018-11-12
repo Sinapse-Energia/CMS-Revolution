@@ -1,0 +1,2 @@
+module Mqtt::MqttConnectionHelper
+end

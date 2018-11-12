@@ -1,0 +1,80 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12">
+    <div class="panel-box">
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#mqtt">MQTT Broker</a>
+        </li>
+     </ul>
+      <div class="tab-content">
+        <div id="mqtt" class="container tab-pane active" style="padding-right: 80px;"><br>
+          <%= form_for :mqtt, :url => connect_mqtt_connection_index_path, method: :get , remote: true do |f| %>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-3">
+                  <%= f.text_field :url, class: 'form-control', placeholder: 'Host url', required: true %>
+                </div>
+                <div class="col-md-3">
+                  <%= f.text_field :port, class: 'form-control', placeholder: 'Port number', required: true %>
+                </div>
+                <div class="col-md-3 submit-show">
+                  <%= f.submit "connect" ,class: "btn connect device-submit btn-right" %>
+                </div>
+                <div class="col-md-3">
+                  <%= link_to 'Disconnect', disconnect_mqtt_connection_index_path, method: :get,remote: true,class: "btn disconnect device-disconnect dis-true btn-right", style: "margin-top: 20px;", disabled: true %>
+                  <%= link_to 'Disconnect', disconnect_mqtt_connection_index_path, method: :get,remote: true,class: "btn disconnect device-disconnect dis-false btn-right" %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <%= f.text_field :username, class: 'form-control', placeholder: 'Username' %>
+                </div>
+                <div class="col-md-3">
+                  <%= f.password_field :password, class: 'form-control', placeholder: 'password' %>
+                </div>
+              </div>
+            </div> 
+          <% end %>
+          <%= link_to 'Get Last Message', get_data_mqtt_connection_index_path, method: :get, remote: true,class: "btn submit-btn-green", style: "margin-top: 20px; float: right" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(".device-submit").on("click",function(){
+    localStorage.setItem("mqtt_url", $('#mqtt_url').val());
+    localStorage.setItem("mqtt_port", $('#mqtt_port').val());
+  });
+
+  if(localStorage["mqtt_port"] != undefined || localStorage["subscribe"] != undefined || localStorage["mqtt_url"] != undefined){
+    $('#mqtt_url').val(localStorage["mqtt_url"]);
+    $('#mqtt_port').val(localStorage["mqtt_port"]);
+    $(".submit-show").hide();
+    $(".dis-false").show();
+    $(".dis-true").hide();
+    $('#mqtt_url').attr("disabled","disabled");
+    $('#mqtt_port').attr("disabled","disabled");
+    $(".subscribe").on("click",function(){
+      localStorage.setItem("subscribe", true);
+    });
+  }else{
+    $(".dis-true").show();
+    $(".dis-false").hide();
+    $(".submit-show").show();
+    $(".subscribe-show").hide();
+  }
+
+  if(localStorage["subscribe"] != undefined){
+    $(".subscribe").attr("disabled","disabled");
+  }
+
+  $(".device-disconnect").on("click",function(){
+    localStorage.clear("mqtt_url")
+    localStorage.clear("mqtt_port")
+    localStorage.clear("subscribe")
+    $(".submit-show").show();
+    $(".subscribe-show").hide();
+  })
+</script>
