@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     get :subscribe,  on: :collection
     get :get_data,  on: :collection
     get :back,  on: :collection
+    get :last_messages_received,  on: :member
   end
   
 end

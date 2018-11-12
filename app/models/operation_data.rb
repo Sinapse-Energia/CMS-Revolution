@@ -1,8 +1,10 @@
 class OperationData
   include Mongoid::Document
   include Mongoid::Timestamps
-  field :I1, type: String
-  field :I2 , type: String
+  field :L3_READ_METERING_R, type: String
+  field :CMC_ID , type: String
+  field :I1, type: Float
+  field :I2 , type: Float
   field :I3 , type: Float
   field :IN , type: Float
   field :U12, type: Float
@@ -17,6 +19,9 @@ class OperationData
   field :Q1 , type: Float
   field :Q2 , type: Float
   field :Q3 , type: Float
+  field :S1 , type: Float
+  field :S2 , type: Float
+  field :S3 , type: Float
   field :FDP1 , type: Float
   field :FDP2 , type: Float
   field :FDP3 , type: Float

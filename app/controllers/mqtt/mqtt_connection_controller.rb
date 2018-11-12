@@ -108,6 +108,13 @@ class Mqtt::MqttConnectionController < ApplicationController
     end
 	end
 
+	def last_messages_received
+		@last_messages = OperationData.where(CMC_ID: params[:id]).order(created_at: :desc).limit(10)
+		respond_to do |format|
+      format.js
+    end
+	end
+
 	private
 
 	def mqtt_params

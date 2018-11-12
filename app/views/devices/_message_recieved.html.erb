@@ -1,0 +1,101 @@
+<hr style="height:1px;border:none;color:#333;background-color:#333;">
+<center><h2><b>Last messages</b></h2></center>
+<hr style="height:1px;border:none;color:#333;background-color:#333;">
+<br><br>
+<div class="table-overflow">
+  <table id= "table-data" class="table table-condensed table-striped table-bordered nowrap" width="100%">
+    <thead>
+      <tr>
+        <td><b><h4><i>Sr. No.</i></h4></b></td>
+        <td><b><h4><i>L3_READ_METERING_R</i></h4></b></td>
+        <td><b><h4><i>CMC_ID</i></h4></b></td>
+        <td><b><h4><i>I1</i></h4></b></td>
+        <td><b><h4><i>I2</i></h4></b></td>
+        <td><b><h4><i>I3</i></h4></b></td>
+        <td><b><h4><i>IN</i></h4></b></td>
+        <td><b><h4><i>U12</i></h4></b></td>
+        <td><b><h4><i>U23</i></h4></b></td>
+        <td><b><h4><i>U32</i></h4></b></td>
+        <td><b><h4><i>V1N</i></h4></b></td>
+        <td><b><h4><i>V2N</i></h4></b></td>
+        <td><b><h4><i>V3N</i></h4></b></td>
+        <td><b><h4><i>P1</i></h4></b></td>
+        <td><b><h4><i>P2</i></h4></b></td>
+        <td><b><h4><i>P3</i></h4></b></td>
+        <td><b><h4><i>Q1</i></h4></b></td>
+        <td><b><h4><i>Q2</i></h4></b></td>
+        <td><b><h4><i>Q3</i></h4></b></td>
+        <td><b><h4><i>S1</i></h4></b></td>
+        <td><b><h4><i>S2</i></h4></b></td>
+        <td><b><h4><i>S3</i></h4></b></td>
+        <td><b><h4><i>FDP1</i></h4></b></td>
+        <td><b><h4><i>FDP2</i></h4></b></td>
+        <td><b><h4><i>FDP3</i></h4></b></td>
+        <td><b><h4><i>FDPS1</i></h4></b></td>
+        <td><b><h4><i>FDPS2</i></h4></b></td>
+        <td><b><h4><i>FDPS3</i></h4></b></td>
+        <td><b><h4><i>EP1</i></h4></b></td>
+        <td><b><h4><i>EP2</i></h4></b></td>
+        <td><b><h4><i>EP3</i></h4></b></td>
+        <td><b><h4><i>EQ1</i></h4></b></td>
+        <td><b><h4><i>EQ2</i></h4></b></td>
+        <td><b><h4><i>EQ3</i></h4></b></td>
+        <td><b><h4><i>ES1</i></h4></b></td>
+        <td><b><h4><i>ES2</i></h4></b></td>
+        <td><b><h4><i>ES3</i></h4></b></td>
+        <td><b><h4><i>F</i></h4></b></td>
+        <td><b><h4><i>TIMESTAMP</i></h4></b></td>
+      </tr>
+    </thead>
+    <tbody style="height:100px;">
+      <% last_messages.each_with_index do |message,i| %>
+        <tr>
+          <td><%=i+1%></td>
+          <td><%=message.L3_READ_METERING_R%></td>
+          <td><%=message.CMC_ID%></td>
+          <td><%=message.I1%></td>
+          <td><%=message.I2%></td>
+          <td><%=message.I3%></td>
+          <td><%=message.IN%></td>
+          <td><%=message.U12%></td>
+          <td><%=message.U23%></td>
+          <td><%=message.U32%></td>
+          <td><%=message.V1N%></td>
+          <td><%=message.V2N%></td>
+          <td><%=message.V3N%></td>
+          <td><%=message.P1%></td>
+          <td><%=message.P2%></td>
+          <td><%=message.P3%></td>
+          <td><%=message.Q1%></td>
+          <td><%=message.Q2%></td>
+          <td><%=message.Q3%></td>
+          <td><%=message.S1%></td>
+          <td><%=message.S2%></td>
+          <td><%=message.S3%></td>
+          <td><%=message.FDP1%></td>
+          <td><%=message.FDP2%></td>
+          <td><%=message.FDP3%></td>
+          <td><%=message.FDPS1%></td>
+          <td><%=message.FDPS2%></td>
+          <td><%=message.FDPS3%></td>
+          <td><%=message.EP1%></td>
+          <td><%=message.EP2%></td>
+          <td><%=message.EP3%></td>
+          <td><%=message.EQ1%></td>
+          <td><%=message.EQ2%></td>
+          <td><%=message.EQ3%></td>
+          <td><%=message.ES1%></td>
+          <td><%=message.ES2%></td>
+          <td><%=message.ES3%></td>
+          <td><%=message.F%></td>
+          <td><%=message.TIMESTAMP%></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<style type="text/css">
+  .table-overflow{
+    overflow-x: scroll;
+  }
+</style>

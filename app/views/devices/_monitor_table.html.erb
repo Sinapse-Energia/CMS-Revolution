@@ -8,45 +8,32 @@
   </thead>
   <tbody style="height:100px;">
     <% devices.each do |device| %>
-      <tr>
-        <td><%= device.name %></td>
-        <td><%= device.id_code %></td>
-        <td><%= device.id_communication %></td>
+      <tr class="device-info">
+        <td class="device-name"><%= device.name %></td>
+        <td class="device-id_code"><%= device.id_code %></td>
+        <td class="device-communication-id" value="<%= device.id_communication %>"><%= device.id_communication %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br><br>
-<hr style="height:1px;border:none;color:#333;background-color:#333;">
-<center><h2><b>Last messages</b></h2></center>
-<hr style="height:1px;border:none;color:#333;background-color:#333;">
-<br><br>
-<table id= "table-data" class="table table-condensed table-striped table-bordered nowrap" width="100%">
-  <thead>
-    <tr>
-      <th>Topic</th>
-      <th>Message</th>
-      <th>Time</th>
-    </tr>
-  </thead>
-  <tbody style="height:100px;">
-    <% publish_message.each do |publish| %>
-      <tr>
-        <td><%= publish.topic %></td>
-        <td><%= publish.message %></td>
-        <td><%= publish.created_at %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+
+<div id="last_messages_received"></div>
 
 <script type="text/javascript">
-  $(document).ready(function() {
-    var table = $('#table-data').DataTable({
-        responsive: true
+  $(".device-info").on("click",function(){
+    var id = $(this).children(".device-communication-id").attr("value");
+    console.log(id)
+    $.ajax({
+      url: "/mqtt_connection/"+id+"/last_messages_received",
+      type: "GET",
+      success: function (data) { 
+        // append data to your page
+        // $("page_element").html(data);
+      }
     });
-  } );
+  })
 </script>
 <style type="text/css">
   .dataTables_filter {
@@ -55,4 +42,7 @@
   .dataTables_length {
     display: none; 
     }
+  .device-info{
+    cursor: pointer;
+  }
 </style>
