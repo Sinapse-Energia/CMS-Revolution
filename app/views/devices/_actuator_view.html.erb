@@ -1,0 +1,222 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<table id= "table-data" class="table table-condensed table-striped table-bordered nowrap" width="100%">
+  <thead>
+    <tr>
+      <th>CMC Name</th>
+      <th>CMC ID</th>
+      <th>CMC Radio</th>
+      <th>R1</th>
+      <th>R2</th>
+      <th>R3</th>
+      <th>R4</th>
+      <th>R5</th>
+      <th>R6</th>
+      <th>R7</th>
+    </tr>
+  </thead>
+  <tbody style="height:100px;">
+    <% devices.each_with_index do |device,i| %>
+      <tr class="device-info id-<%= i+1%>">
+        <td class="device-name" value="<%= device.name %>"><%= device.name %></td>
+        <td class="device-id_code" value="<%= device.id_code %>"><%= device.id_code %></td>
+        <td class="device-communication-id" value="<%= device.id_communication %>"><%= device.id_communication %></td>
+        <td class = "r1">
+          <input type="range" id="RangeFilter" name="points" onchange="filterme(this.value);" min="1" class="rangeAll" max="3" value="2">
+          <span class="span1" >X</span>
+        </td>
+        <td class = "r2">
+          <input type="range" id="RangeFilter1" name="points" onchange="filterme(this.value);" min="4" class="rangeAll" max="6" value="5">
+          <span class="span2" >X</span>
+        </td>
+        <td class = "r3">
+          <input type="range" id="RangeFilter2" name="points" onchange="filterme(this.value);" min="7" class="rangeAll" max="9" value="8">
+          <span class="span3" >X</span>
+        </td>
+        <td class = "r4">
+          <input type="range" id="RangeFilter3" name="points" onchange="filterme(this.value);" min="10" class="rangeAll" max="12" value="11">
+          <span class="span4" >X</span>
+        </td>
+        <td class = "r5">
+          <input type="range" id="RangeFilter4" name="points" onchange="filterme(this.value);" min="13" class="rangeAll" max="15" value="14">
+          <span class="span5" >X</span>
+        </td>
+        <td class = "r6">
+          <input type="range" id="RangeFilter5" name="points" onchange="filterme(this.value);" min="16" class="rangeAll" max="18" value="17">
+          <span class="span6" >X</span>
+        </td>
+        <td class = "r7">
+          <input type="range" id="RangeFilter6" name="points" onchange="filterme(this.value);" min="19" class="rangeAll" max="21" value="20">
+          <span class="span7" >X</span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center">
+      <button class="btn btn-info send-msg" style="font-size: 25px; width: 10%;">Send</button>
+    </div>
+  </div>
+</div>
+
+<div class="actuator_publish">
+  <%= render partial: 'devices/actuator_publish_table', locals: {actuator_publish_message: @actuator_publish_message} %>
+</div>
+
+<script type="text/javascript">
+  function filterme(value) {
+    var device_count = "<%=devices.count%>"
+    for(i = 1; i <= device_count; i++ ){
+      value = parseInt(value, 10); // Convert to an integer
+      if (value === 1) {
+        $(".id-"+i).children(".r1").children(".span1").text('Yes');
+      } else if (value === 2) {
+        $(".id-"+i).children(".r1").children(".span1").text('X');
+      } else if (value === 3) {
+        $(".id-"+i).children(".r1").children(".span1").text('No');
+      }else if (value === 4) {
+        $(".id-"+i).children(".r2").children(".span2").text('Yes');
+      } else if (value === 5) {
+        $(".id-"+i).children(".r2").children(".span2").text('X');
+      } else if (value === 6) {
+        $(".id-"+i).children(".r2").children(".span2").text('No');
+      }else if (value === 7) {
+        $(".id-"+i).children(".r3").children(".span3").text('Yes');
+      } else if (value === 8) {
+        $(".id-"+i).children(".r3").children(".span3").text('X');
+      } else if (value === 9) {
+        $(".id-"+i).children(".r3").children(".span3").text('No');
+      }else if (value === 10) {
+        $(".id-"+i).children(".r4").children(".span4").text('Yes');
+      } else if (value === 11) {
+        $(".id-"+i).children(".r4").children(".span4").text('X');
+      } else if (value === 12) {
+        $(".id-"+i).children(".r4").children(".span4").text('No');
+      }else if (value === 13) {
+        $(".id-"+i).children(".r5").children(".span5").text('Yes');
+      } else if (value === 14) {
+        $(".id-"+i).children(".r5").children(".span5").text('X');
+      } else if (value === 15) {
+        $(".id-"+i).children(".r5").children(".span5").text('No');
+      }else if (value === 16) {
+        $(".id-"+i).children(".r6").children(".span6").text('Yes');
+      } else if (value === 17) {
+        $(".id-"+i).children(".r6").children(".span6").text('X');
+      } else if (value === 18) {
+        $(".id-"+i).children(".r6").children(".span6").text('No');
+      }else if (value === 19) {
+        $(".id-"+i).children(".r7").children(".span7").text('Yes');
+      } else if (value === 20) {
+        $(".id-"+i).children(".r7").children(".span7").text('X');
+      } else if (value === 21) {
+        $(".id-"+i).children(".r7").children(".span7").text('No');
+      }
+    }
+  }
+
+  $(".send-msg").on("click",function(){
+    var device_count = "<%=devices.count%>"
+    var r1_arr = [];
+    var r2_arr = [];
+    var r3_arr = [];
+    var r4_arr = [];
+    var r5_arr = [];
+    var r6_arr = [];
+    var r7_arr = [];
+    var device_name_arr = [];
+    var device_id_code_arr = [];
+    var device_id_communication_arr = [];
+    var arr = [];
+    for(i = 1; i <= device_count; i++ ){
+      var r1 = $(".id-"+i).children(".r1").children("#RangeFilter").val();
+      var r2 = $(".id-"+i).children(".r2").children("#RangeFilter1").val();
+      var r3 = $(".id-"+i).children(".r3").children("#RangeFilter2").val();
+      var r4 = $(".id-"+i).children(".r4").children("#RangeFilter3").val();
+      var r5 = $(".id-"+i).children(".r5").children("#RangeFilter4").val();
+      var r6 = $(".id-"+i).children(".r6").children("#RangeFilter5").val();
+      var r7 = $(".id-"+i).children(".r7").children("#RangeFilter6").val();
+      var device_name = $(".id-"+i).children(".device-name").attr("value");
+      var device_id_code = $(".id-"+i).children(".device-id_code").attr("value");
+      var device_id_communication = $(".id-"+i).children(".device-communication-id").attr("value");
+      if (r1 == "2"){
+        r1 = "x"
+      }else if(r1 == "1"){
+        r1 = "1"
+      }else if(r1 == "3"){
+        r1 = "0"
+      }
+
+      if (r2 == "5"){
+        r2 = "x"
+      }else if(r2 == "4"){
+        r2 = "1"
+      }else if(r2 == "6"){
+        r2 = "0"
+      }
+
+      if (r3 == "8"){
+        r3 = "x"
+      }else if(r3 == "7"){
+        r3 = "1"
+      }else if(r3 == "9"){
+        r3 = "0"
+      }
+
+      if (r4 == "11"){
+        r4 = "x"
+      }else if(r4 == "10"){
+        r4 = "1"
+      }else if(r4 == "12"){
+        r4 = "0"
+      }
+
+      if (r5 == "14"){
+        r5 = "x"
+      }else if(r5 == "13"){
+        r5 = "1"
+      }else if(r5 == "15"){
+        r5 = "0"
+      }
+
+      if (r6 == "17"){
+        r6 = "x"
+      }else if(r6 == "16"){
+        r6 = "1"
+      }else if(r6 == "18"){
+        r6 = "0"
+      }
+
+      if (r7 == "20"){
+        r7 = "x"
+      }else if(r7 == "19"){
+        r7 = "1"
+      }else if(r7 == "21"){
+        r7 = "0"
+      }
+      r1_arr.push(r1)
+      r2_arr.push(r2)
+      r3_arr.push(r3)
+      r4_arr.push(r4)
+      r5_arr.push(r5)
+      r6_arr.push(r6)
+      r7_arr.push(r7)
+      device_name_arr.push(device_name)
+      device_id_code_arr.push(device_id_code)
+      device_id_communication_arr.push(device_id_communication)
+      arr.push(r1,r2,r3,r4,r5,r6,r7,device_name,device_id_code,device_id_communication)
+    }
+    console.log(arr)
+    $.ajax({
+      url: "/mqtt_connection/publish_actuator_message",
+      type: "GET",
+      // data: {"r1" : r1,"r2" : r2,"r3" : r3,"r4" : r4,"r5" : r5,"r6" : r6,"r7" : r7},
+      data: {"data": arr },
+      success: function (data) { 
+        // append data to your page
+        // $("page_element").html(data);
+      }
+    });
+  })
+</script>

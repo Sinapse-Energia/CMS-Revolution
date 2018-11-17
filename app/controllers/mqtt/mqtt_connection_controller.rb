@@ -41,7 +41,7 @@ class Mqtt::MqttConnectionController < ApplicationController
 	end
 
 	def publishing
-		ap params.permit!
+		params.permit!
 		mqtt_client = SinapseMQTTClientSingleton.instance
 
 		if mqtt_client.connected?
@@ -110,6 +110,24 @@ class Mqtt::MqttConnectionController < ApplicationController
 
 	def last_messages_received
 		@last_messages = OperationData.where(CMC_ID: params[:id]).order(created_at: :desc).limit(10)
+		respond_to do |format|
+      format.js
+    end
+	end
+
+	def publish_actuator_message
+		mqtt_client = SinapseMQTTClientSingleton.instance
+		message_data = params[:data].each_slice(10).to_a
+		message_data.each do |msg|
+			topic = msg[7]+"/CMC/ACT/"+msg[8]
+			message = "11;ACT"+msg[0]+";""ACT"+msg[1]+";""ACT"+msg[2]+";""ACT"+msg[3]+";""ACT"+msg[4]+";""ACT"+msg[5]+";""ACT"+msg[6]+";TRUE"
+			if mqtt_client.connected?
+				#mqtt_client.publish(topic, message)
+			  PublishActuator.create(topic:topic,message:message,user_id: current_user.id)
+			  mqtt_client.publish(topic, message)
+			end
+		end
+		@actuator_publish_message = PublishActuator.where(user_id: current_user.id)
 		respond_to do |format|
       format.js
     end
