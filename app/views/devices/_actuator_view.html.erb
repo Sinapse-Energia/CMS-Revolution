@@ -21,31 +21,31 @@
         <td class="device-id_code" value="<%= device.id_code %>"><%= device.id_code %></td>
         <td class="device-communication-id" value="<%= device.id_communication %>"><%= device.id_communication %></td>
         <td class = "r1">
-          <input type="range" id="RangeFilter" name="points" onchange="filterme(this.value);" min="1" class="rangeAll" max="3" value="2">
+          <input type="range" id="RangeFilter" name="points" min="1" class="rangeAll" max="3" value="2">
           <span class="span1" >X</span>
         </td>
         <td class = "r2">
-          <input type="range" id="RangeFilter1" name="points" onchange="filterme(this.value);" min="4" class="rangeAll" max="6" value="5">
+          <input type="range" id="RangeFilter1" name="points" min="4" class="rangeAll" max="6" value="5">
           <span class="span2" >X</span>
         </td>
         <td class = "r3">
-          <input type="range" id="RangeFilter2" name="points" onchange="filterme(this.value);" min="7" class="rangeAll" max="9" value="8">
+          <input type="range" id="RangeFilter2" name="points" min="7" class="rangeAll" max="9" value="8">
           <span class="span3" >X</span>
         </td>
         <td class = "r4">
-          <input type="range" id="RangeFilter3" name="points" onchange="filterme(this.value);" min="10" class="rangeAll" max="12" value="11">
+          <input type="range" id="RangeFilter3" name="points" min="10" class="rangeAll" max="12" value="11">
           <span class="span4" >X</span>
         </td>
         <td class = "r5">
-          <input type="range" id="RangeFilter4" name="points" onchange="filterme(this.value);" min="13" class="rangeAll" max="15" value="14">
+          <input type="range" id="RangeFilter4" name="points" min="13" class="rangeAll" max="15" value="14">
           <span class="span5" >X</span>
         </td>
         <td class = "r6">
-          <input type="range" id="RangeFilter5" name="points" onchange="filterme(this.value);" min="16" class="rangeAll" max="18" value="17">
+          <input type="range" id="RangeFilter5" name="points" min="16" class="rangeAll" max="18" value="17">
           <span class="span6" >X</span>
         </td>
         <td class = "r7">
-          <input type="range" id="RangeFilter6" name="points" onchange="filterme(this.value);" min="19" class="rangeAll" max="21" value="20">
+          <input type="range" id="RangeFilter6" name="points" min="19" class="rangeAll" max="21" value="20">
           <span class="span7" >X</span>
         </td>
       </tr>
@@ -66,54 +66,56 @@
 </div>
 
 <script type="text/javascript">
-  function filterme(value) {
-    var device_count = "<%=devices.count%>"
-    for(i = 1; i <= device_count; i++ ){
-      value = parseInt(value, 10); // Convert to an integer
-      if (value === 1) {
-        $(".id-"+i).children(".r1").children(".span1").text('On');
-      } else if (value === 2) {
-        $(".id-"+i).children(".r1").children(".span1").text('X');
-      } else if (value === 3) {
-        $(".id-"+i).children(".r1").children(".span1").text('Off');
-      }else if (value === 4) {
-        $(".id-"+i).children(".r2").children(".span2").text('On');
-      } else if (value === 5) {
-        $(".id-"+i).children(".r2").children(".span2").text('X');
-      } else if (value === 6) {
-        $(".id-"+i).children(".r2").children(".span2").text('Off');
-      }else if (value === 7) {
-        $(".id-"+i).children(".r3").children(".span3").text('On');
-      } else if (value === 8) {
-        $(".id-"+i).children(".r3").children(".span3").text('X');
-      } else if (value === 9) {
-        $(".id-"+i).children(".r3").children(".span3").text('Off');
-      }else if (value === 10) {
-        $(".id-"+i).children(".r4").children(".span4").text('On');
-      } else if (value === 11) {
-        $(".id-"+i).children(".r4").children(".span4").text('X');
-      } else if (value === 12) {
-        $(".id-"+i).children(".r4").children(".span4").text('Off');
-      }else if (value === 13) {
-        $(".id-"+i).children(".r5").children(".span5").text('On');
-      } else if (value === 14) {
-        $(".id-"+i).children(".r5").children(".span5").text('X');
-      } else if (value === 15) {
-        $(".id-"+i).children(".r5").children(".span5").text('Off');
-      }else if (value === 16) {
-        $(".id-"+i).children(".r6").children(".span6").text('On');
-      } else if (value === 17) {
-        $(".id-"+i).children(".r6").children(".span6").text('X');
-      } else if (value === 18) {
-        $(".id-"+i).children(".r6").children(".span6").text('Off');
-      }else if (value === 19) {
-        $(".id-"+i).children(".r7").children(".span7").text('On');
-      } else if (value === 20) {
-        $(".id-"+i).children(".r7").children(".span7").text('X');
-      } else if (value === 21) {
-        $(".id-"+i).children(".r7").children(".span7").text('Off');
-      }
-    }
+  var device_count = "<%=devices.count%>"
+  for(i=1;i<=device_count;i++){
+    $(".id-"+i).on("click",function(){
+      $("#RangeFilter,#RangeFilter1,#RangeFilter2,#RangeFilter3,#RangeFilter4,#RangeFilter5,#RangeFilter6").on("change",function(){
+        $(".id-"+i).css({"background-color": "yellow", "font-size": "200%"});
+        if($(this).val() === "1"){
+          $(this).next("span").text("On")
+        }else if($(this).val() === "2"){
+          $(this).next("span").text("X")
+        }else if($(this).val() === "3"){
+          $(this).next("span").text("Off")
+        }else if($(this).val() === "4"){
+          $(this).next("span").text("On")
+        }else if($(this).val() === "5"){
+          $(this).next("span").text("X")
+        }else if($(this).val() === "6"){
+          $(this).next("span").text("Off")
+        }else if($(this).val() === "7"){
+          $(this).next("span").text("On")
+        }else if($(this).val() === "8"){
+          $(this).next("span").text("X")
+        }else if($(this).val() === "9"){
+          $(this).next("span").text("Off")
+        }else if($(this).val() === "10"){
+          $(this).next("span").text("On")
+        }else if($(this).val() === "11"){
+          $(this).next("span").text("X")
+        }else if($(this).val() === "12"){
+          $(this).next("span").text("Off")
+        }else if($(this).val() === "13"){
+          $(this).next("span").text("On")
+        }else if($(this).val() === "14"){
+          $(this).next("span").text("X")
+        }else if($(this).val() === "15"){
+          $(this).next("span").text("Off")
+        }else if($(this).val() === "16"){
+          $(this).next("span").text("On")
+        }else if($(this).val() === "17"){
+          $(this).next("span").text("X")
+        }else if($(this).val() === "18"){
+          $(this).next("span").text("Off")
+        }else if($(this).val() === "19"){
+          $(this).next("span").text("On")
+        }else if($(this).val() === "20"){
+          $(this).next("span").text("X")
+        }else if($(this).val() === "21"){
+          $(this).next("span").text("Off")
+        }
+      })
+    })
   }
 
   $(".send-msg").on("click",function(){
