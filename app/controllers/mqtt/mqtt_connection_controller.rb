@@ -119,7 +119,7 @@ class Mqtt::MqttConnectionController < ApplicationController
 		mqtt_client = SinapseMQTTClientSingleton.instance
 		message_data = params[:data].each_slice(10).to_a
 		message_data.each do |msg|
-			topic = msg[7]+"/CMC/ACT/"+msg[8]
+			topic = TEST_CMSR+"/CMC/ACT/"+msg[8]
 			message = "11;ACT"+msg[0]+";""ACT"+msg[1]+";""ACT"+msg[2]+";""ACT"+msg[3]+";""ACT"+msg[4]+";""ACT"+msg[5]+";""ACT"+msg[6]+";TRUE"
 			if mqtt_client.connected?
 				#mqtt_client.publish(topic, message)
