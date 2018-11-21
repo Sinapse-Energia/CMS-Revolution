@@ -23,6 +23,8 @@
 
 <script type="text/javascript">
   $(".device-info").on("click",function(){
+    $(".device-info").css("background-color", "");
+    $(this).css("background-color", "#C0C0C0")
     var id = $(this).children(".device-communication-id").attr("value");
     console.log(id)
     $.ajax({

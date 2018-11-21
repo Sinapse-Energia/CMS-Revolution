@@ -66,22 +66,19 @@ class Mqtt::MqttConnectionController < ApplicationController
 		if subscribe_topic.where(topic:params[:mqtt_subscribe][:topic]).present?
 		else
 			if mqtt_client.connected?
-			  #mqtt_client.subscribe(topic)
+				#mqtt_client.subscribe(topic)
 			  # topics = ["DEMOSTRADOR/CMC/PERIODIC"]
-			  topics << params[:mqtt_subscribe][:topic]
-			  SubscribeTopic.create(topic:params[:mqtt_subscribe][:topic],user_id:current_user.id)
-			  if mqtt_client.connected?
-			    topics.each do |topic|
-			      mqtt_client.subscribe(topic)
-			      # mqtt_client.topics_subscribed.push(topic)
-			    end
-			  end
+			  topic = params[:mqtt_subscribe][:topic]
+			  periodic_topic = topic+"/CMC/PERIODIC"
+			  measurement_topic = topic+"/CMC/MEASUREMENTS"
+			  alert_topic = topic+"/CMC/ALERTS"
+			  debug_topic = topic+"/CMC/DEBUG"
+			  SubscribeTopic.create(topic:periodic_topic,user_id:current_user.id)
+		  	mqtt_client.subscribe(periodic_topic)
+		  	mqtt_client.subscribe(measurement_topic)
+		  	mqtt_client.subscribe(alert_topic)
+		  	mqtt_client.subscribe(debug_topic)
 			  ReceiveMqttMessagesJob.new.async.perform()
-			end
-			if mqtt_client.connected?
-				json_data = {"status" => "200", "message" => "you are subscribed to the mqtt_client"}
-			else
-				json_data = {"status" => "404", "message" => "unable to subscribe please try again"}
 			end
 			publish_message
 			respond_to do |format|
@@ -118,19 +115,27 @@ class Mqtt::MqttConnectionController < ApplicationController
 	def publish_actuator_message
 		mqtt_client = SinapseMQTTClientSingleton.instance
 		message_data = params[:data].each_slice(10).to_a
+		flag = false
 		message_data.each do |msg|
-			topic = TEST_CMSR+"/CMC/ACT/"+msg[8]
+			topic = "TEST_CMSR"+"/CMC/ACT/"+msg[8]
 			message = "11;ACT"+msg[0]+";""ACT"+msg[1]+";""ACT"+msg[2]+";""ACT"+msg[3]+";""ACT"+msg[4]+";""ACT"+msg[5]+";""ACT"+msg[6]+";TRUE"
 			if mqtt_client.connected?
 				#mqtt_client.publish(topic, message)
 			  PublishActuator.create(topic:topic,message:message,user_id: current_user.id)
 			  mqtt_client.publish(topic, message)
+			else
+				flag = true
 			end
 		end
 		@actuator_publish_message = PublishActuator.where(user_id: current_user.id)
-		respond_to do |format|
-      format.js
-    end
+		if flag == false
+			@notice = "Message send successfully"
+			respond_to do |format|
+	      format.js
+	    end
+    else
+			@notice = "Please check your connection message not send"
+	  end
 	end
 
 	private
