@@ -1,8 +1,49 @@
-<div class="top-panel">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/devices"><img alt="logo" src="/assets/inner-logo-880c6413d3f20851c5842073bfc3a85a549462d9c39771dc4122d3eaf1376947.svg"></a>
+        </div>
+        <ul class="nav navbar-right navbar-top-links">
+            <li class="userdp dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <span class="user-profile">
+                      
+                      <% if current_user.avatar.url(:thumb) == "/assets/missing_device.png" %>
+                        <img src="/images/missing_user.png" alt="Missing user">
+                      <% else %>
+                       <%= image_tag(current_user.avatar.url(:thumb)) %>
+                       <% end %>
+                    </span>
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li>
+                      <%= link_to " User Profile", edit_session_path(current_user.id) , :class => "fa fa-user fa-fw" %>
+                    </li>
+                    <!-- <li>
+                        <a href="#">
+                            <i class="fa fa-gear fa-fw"></i>
+                            Settings</a>
+                    </li> -->
+                    <li>
+                        <a rel="nofollow" href="/logout">
+                        <i class="fa fa-sign-out fa-fw"></i>
+                        Logout
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+  </nav>
+
+<div class="top-panel" style="margin-top: 5%;">
 	<div class="container-fluid">
 	  <div class="row">
 	    <div class="col-xs-12 col-sm-6">
-	      <div class="page-title">Profile</div>
+	      <!-- <div class="page-title">Profile</div> -->
 	  </div>
 	  <div class="col-xs-12 col-sm-6">
 
