@@ -1,3 +1,9 @@
+<%if @notice == "Topic Have been Subscribed"%>
+  <p class="alert alert-success notice"><%=@notice%></p>
+<%elsif @notice == "Please check your connection reconnect the mqtt client to subscribe topic"%>
+  <p class="alert alert-warning notice"><%=@notice%></p>
+<%else%>
+<%end%>
 <table id= "table-data"   class="table table-condensed table-striped table-bordered nowrap" width="100%">
   <thead>
     <tr>
@@ -36,3 +42,6 @@
     <% end %>
   </tbody>
 </table>
+<script type="text/javascript">
+   $(".notice").fadeOut(5000);
+</script>

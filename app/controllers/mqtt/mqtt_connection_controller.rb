@@ -43,25 +43,32 @@ class Mqtt::MqttConnectionController < ApplicationController
 	def publishing
 		params.permit!
 		mqtt_client = SinapseMQTTClientSingleton.instance
-
+		flag = false
 		if mqtt_client.connected?
 		  #mqtt_client.publish(topic, message)
 		  PublishMessage.create(topic:params[:mqtt_publish][:topic],message:params[:mqtt_publish][:message],user_id: current_user.id)
 		  if PublishMessage.where(user_id: current_user.id).count > 10
 		  	PublishMessage.first.delete
 		  end
-		  mqtt_client.publish(params[:mqtt_publish][:topic], params[:mqtt_publish][:message])  
+		  mqtt_client.publish(params[:mqtt_publish][:topic], params[:mqtt_publish][:message])
+		  flag = true
 		end
 		subscribe_topic
 		publish_message
-		respond_to do |format|
-      format.js {}
-    end
+		if flag == true
+			@notice = "Message is been published"
+			respond_to do |format|
+	      format.js
+	    end
+    else
+			@notice = "Please check your connection reconnect the mqtt client to publish message"
+	  end
 	end
 
 	def subscribe
 		mqtt_client = SinapseMQTTClientSingleton.instance
 	  topics = []
+	  flag = false
 		subscribe_topic
 		if subscribe_topic.where(topic:params[:mqtt_subscribe][:topic]).present?
 		else
@@ -79,11 +86,17 @@ class Mqtt::MqttConnectionController < ApplicationController
 		  	mqtt_client.subscribe(alert_topic)
 		  	mqtt_client.subscribe(debug_topic)
 			  ReceiveMqttMessagesJob.new.async.perform()
+			  flag = true
 			end
 			publish_message
-			respond_to do |format|
-	      format.js {}
-	    end
+			if flag == true
+				@notice = "Topic Have been Subscribed"
+				respond_to do |format|
+		      format.js
+		    end
+	    else
+				@notice = "Please check your connection reconnect the mqtt client to subscribe topic"
+		  end
 	  end
 	end
 
