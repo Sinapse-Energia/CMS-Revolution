@@ -1,3 +1,4 @@
+<%@mqtt_client = SinapseMQTTClientSingleton.instance%>
 <%if @notice == "Topic Have been Subscribed"%>
   <p class="alert alert-success notice"><%=@notice%></p>
 <%elsif @notice == "Please check your connection reconnect the mqtt client to subscribe topic"%>
@@ -11,10 +12,23 @@
     </tr>
   </thead>
   <tbody style="height:100px;">
-    <% subscribe_topic.each do |subscribe| %>
-      <tr>
-        <td><%= subscribe.topic %></td>
-      </tr>
+    <% if @mqtt_client.connected? %>  
+      <% subscribe_topic.each do |subscribe| %>
+        <% if subscribe.periodic_topic.present? %>  
+          <tr>
+            <td><%= subscribe.periodic_topic %></td>
+          </tr>
+          <tr>
+            <td><%= subscribe.measurement_topic %></td>
+          </tr>  
+          <tr>
+            <td><%= subscribe.alert_topic %></td>
+          </tr>  
+          <tr>
+            <td><%= subscribe.debug_topic %></td>
+          </tr>
+        <% end %>  
+      <% end %>
     <% end %>
   </tbody>
 </table>
@@ -42,6 +56,9 @@
     <% end %>
   </tbody>
 </table>
+
+
+
 <script type="text/javascript">
    $(".notice").fadeOut(5000);
 </script>

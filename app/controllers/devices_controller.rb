@@ -6,10 +6,12 @@ class DevicesController < ApplicationController
   before_action :authorize
   
   def index
+    @mqtt_client = SinapseMQTTClientSingleton.instance
     @devices = Device.where(user_id: current_user.id)
     @publish_message = PublishMessage.where(user_id: current_user.id)
     @subscribe_topic = SubscribeTopic.where(user_id: current_user.id)
-    @actuator_publish_message = PublishActuator.where(user_id: current_user.id)
+    @actuator_publish_message = PublishActuator.where(user_id: current_user.id).order(created_at: :desc)
+    # @last_messages = OperationData.where(CMC_ID: params[:id]).order(created_at: :desc).limit(10)
   end
 
   def new

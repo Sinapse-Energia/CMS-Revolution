@@ -1,1 +1,3 @@
-$('#management').html("<%= escape_javascript(render :partial => '/devices/mqtt_client') %>");
+$('#management').html("<%= escape_javascript(render :partial => '/devices/management_device') %>");
+
+// we refreshing instead of rendering management_device also in disconnect js

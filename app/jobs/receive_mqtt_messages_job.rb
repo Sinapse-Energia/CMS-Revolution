@@ -7,6 +7,8 @@ class ReceiveMqttMessagesJob < ActiveJob::Base
 
     if mqtt_client.connected? then
    		mqtt_client.receive_messages_from_subscribed_topics do |topic, message|
+        ap message
+        ap topic
         arr = [];
         arr = message.split("\;")
         if topic.include?("PERIODIC") || topic.include?("MEASUREMENTS")

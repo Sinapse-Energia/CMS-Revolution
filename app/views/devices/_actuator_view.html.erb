@@ -16,37 +16,136 @@
   </thead>
   <tbody style="height:100px;">
     <% devices.each_with_index do |device,i| %>
+      <% if ( device.r1 == "1" ) %>
+        <% device.r1 = 3 %>
+      <% elsif (device.r1 == "0" ) %>
+        <% device.r1 = 1 %>
+      <% else %>
+        <% device.r1 = "2" %>
+      <% end %>
+
+      <% if ( device.r2 == "1" ) %>
+        <% device.r2 = 3 %>
+      <% elsif (device.r2 == "0" ) %>
+        <% device.r2 = 1 %>
+      <% else %>
+        <% device.r2 = "2" %>
+      <% end %>
+      
+      <% if ( device.r3 == "1" ) %>
+        <% device.r3 = 3 %>
+      <% elsif (device.r3 == "0" ) %>
+        <% device.r3 = 1 %>
+      <% else %>
+        <% device.r3 = "2" %>
+      <% end %>
+      
+      <% if ( device.r4 == "1" ) %>
+        <% device.r4 = 3 %>
+      <% elsif (device.r4 == "0" ) %>
+        <% device.r4 = 1 %>
+      <% else %>
+        <% device.r4 = "2" %>
+      <% end %>
+      
+      <% if ( device.r5 == "1" ) %>
+        <% device.r5 = 3 %>
+      <% elsif (device.r5 == "0" ) %>
+        <% device.r5 = 1 %>
+      <% else %>
+        <% device.r5 = "2" %>
+      <% end %>
+      
+      <% if ( device.r6 == "1" ) %>
+        <% device.r6 = 3 %>
+      <% elsif (device.r6 == "0" ) %>
+        <% device.r6 = 1 %>
+      <% else %>
+        <% device.r6 = "2" %>
+      <% end %>
+      
+      <% if ( device.r7 == "1" ) %>
+        <% device.r7 = 3 %>
+      <% elsif (device.r7 == "0" ) %>
+        <% device.r7 = 1 %>
+      <% else %>
+        <% device.r7 = "2" %>
+      <% end %>
+      
       <tr class="device-info id-<%= i+1%>">
         <td class="device-name" value="<%= device.name %>"><%= device.name %></td>
         <td class="device-id_code" value="<%= device.id_code %>"><%= device.id_code %></td>
         <td class="device-communication-id" value="<%= device.id_communication %>"><%= device.id_communication %></td>
         <td class = "r1">
-          <input type="range" id="RangeFilter" name="points" min="1" class="rangeAll" max="3" value="2">
-          <span class="span1" >X</span>
+          <input type="range" id="RangeFilter" name="points" min="1" class="rangeAll" max="3" value="<%= device.r1 %>">
+          <% if ( device.r1 == "1" ) %>
+            <span class="span1">Off</span>
+          <% elsif (device.r1 == "2" ) %>
+            <span class="span1" >X</span>
+          <% else %>
+            <span class="span1" >On</span>
+          <% end %>
+          
         </td>
         <td class = "r2">
-          <input type="range" id="RangeFilter1" name="points" min="4" class="rangeAll" max="6" value="5">
-          <span class="span2" >X</span>
+          <input type="range" id="RangeFilter1" name="points" min="1" class="rangeAll" max="3" value="<%= device.r2 %>">
+          <% if ( device.r2 == "1" ) %>
+            <span class="span1">Off</span>
+          <% elsif (device.r2 == "2" ) %>
+            <span class="span1" >X</span>
+          <% else %>
+            <span class="span1" >On</span>
+          <% end %>
         </td>
         <td class = "r3">
-          <input type="range" id="RangeFilter2" name="points" min="7" class="rangeAll" max="9" value="8">
-          <span class="span3" >X</span>
+          <input type="range" id="RangeFilter2" name="points" min="1" class="rangeAll" max="3" value="<%= device.r3 %>">
+          <% if ( device.r3 == "1" ) %>
+            <span class="span1">Off</span>
+          <% elsif (device.r3 == "2" ) %>
+            <span class="span1" >X</span>
+          <% else %>
+            <span class="span1" >On</span>
+          <% end %>
         </td>
         <td class = "r4">
-          <input type="range" id="RangeFilter3" name="points" min="10" class="rangeAll" max="12" value="11">
-          <span class="span4" >X</span>
+          <input type="range" id="RangeFilter3" name="points" min="1" class="rangeAll" max="3" value="<%= device.r4 %>">
+          <% if ( device.r4 == "1" ) %>
+            <span class="span1">Off</span>
+          <% elsif (device.r4 == "2" ) %>
+            <span class="span1" >X</span>
+          <% else %>
+            <span class="span1" >On</span>
+          <% end %>
         </td>
         <td class = "r5">
-          <input type="range" id="RangeFilter4" name="points" min="13" class="rangeAll" max="15" value="14">
-          <span class="span5" >X</span>
+          <input type="range" id="RangeFilter4" name="points" min="1" class="rangeAll" max="3" value="<%= device.r5 %>">
+          <% if ( device.r5 == "1" ) %>
+            <span class="span1">Off</span>
+          <% elsif (device.r5 == "2" ) %>
+            <span class="span1" >X</span>
+          <% else %>
+            <span class="span1" >On</span>
+          <% end %>
         </td>
         <td class = "r6">
-          <input type="range" id="RangeFilter5" name="points" min="16" class="rangeAll" max="18" value="17">
-          <span class="span6" >X</span>
+          <input type="range" id="RangeFilter5" name="points" min="1" class="rangeAll" max="3" value="<%= device.r6 %>">
+          <% if ( device.r6 == "1" ) %>
+            <span class="span1">Off</span>
+          <% elsif (device.r6 == "2" ) %>
+            <span class="span1" >X</span>
+          <% else %>
+            <span class="span1" >On</span>
+          <% end %>
         </td>
         <td class = "r7">
-          <input type="range" id="RangeFilter6" name="points" min="19" class="rangeAll" max="21" value="20">
-          <span class="span7" >X</span>
+          <input type="range" id="RangeFilter6" name="points" min="1" class="rangeAll" max="3" value="<%= device.r7 %>">
+          <% if ( device.r7 == "1" ) %>
+            <span class="span1">Off</span>
+          <% elsif (device.r7 == "2" ) %>
+            <span class="span1" >X</span>
+          <% else %>
+            <span class="span1" >On</span>
+          <% end %>
         </td>
       </tr>
     <% end %>
@@ -66,57 +165,16 @@
 </div>
 
 <script type="text/javascript">
-  var device_count = "<%=devices.count%>"
-  for(i=1;i<=device_count;i++){
-    $(".id-"+i).on("click",function(){
-      $("#RangeFilter,#RangeFilter1,#RangeFilter2,#RangeFilter3,#RangeFilter4,#RangeFilter5,#RangeFilter6").on("change",function(){
-        $(this).closest("td").css({"background-color": "#D3D3D3"});
-        if($(this).val() === "1"){
-          $(this).next("span").text("Off")
-        }else if($(this).val() === "2"){
-          $(this).next("span").text("X")
-        }else if($(this).val() === "3"){
-          $(this).next("span").text("On")
-        }else if($(this).val() === "4"){
-          $(this).next("span").text("Off")
-        }else if($(this).val() === "5"){
-          $(this).next("span").text("X")
-        }else if($(this).val() === "6"){
-          $(this).next("span").text("On")
-        }else if($(this).val() === "7"){
-          $(this).next("span").text("Off")
-        }else if($(this).val() === "8"){
-          $(this).next("span").text("X")
-        }else if($(this).val() === "9"){
-          $(this).next("span").text("On")
-        }else if($(this).val() === "10"){
-          $(this).next("span").text("Off")
-        }else if($(this).val() === "11"){
-          $(this).next("span").text("X")
-        }else if($(this).val() === "12"){
-          $(this).next("span").text("On")
-        }else if($(this).val() === "13"){
-          $(this).next("span").text("Off")
-        }else if($(this).val() === "14"){
-          $(this).next("span").text("X")
-        }else if($(this).val() === "15"){
-          $(this).next("span").text("On")
-        }else if($(this).val() === "16"){
-          $(this).next("span").text("Off")
-        }else if($(this).val() === "17"){
-          $(this).next("span").text("X")
-        }else if($(this).val() === "18"){
-          $(this).next("span").text("On")
-        }else if($(this).val() === "19"){
-          $(this).next("span").text("Off")
-        }else if($(this).val() === "20"){
-          $(this).next("span").text("X")
-        }else if($(this).val() === "21"){
-          $(this).next("span").text("On")
-        }
-      })
-    })
-  }
+  $(".rangeAll").on("change",function(){
+    $(this).closest("td").css({"background-color": "#D3D3D3"});
+    if($(this).val() === "1"){
+      $(this).next("span").text("Off")
+    }else if($(this).val() === "2"){
+      $(this).next("span").text("X")
+    }else if($(this).val() === "3"){
+      $(this).next("span").text("On")
+    }
+  })
 
   $(".send-msg").on("click",function(){
     var device_count = "<%=devices.count%>"
@@ -145,58 +203,59 @@
       if (r1 == "2"){
         r1 = "x"
       }else if(r1 == "1"){
-        r1 = "1"
-      }else if(r1 == "3"){
         r1 = "0"
+      }else if(r1 == "3"){
+        r1 = "1"
       }
 
-      if (r2 == "5"){
+      if (r2 == "2"){
         r2 = "x"
-      }else if(r2 == "4"){
-        r2 = "1"
-      }else if(r2 == "6"){
+      }else if(r2 == "1"){
         r2 = "0"
+      }else if(r2 == "3"){
+        r2 = "1"
       }
 
-      if (r3 == "8"){
+      if (r3 == "2"){
         r3 = "x"
-      }else if(r3 == "7"){
-        r3 = "1"
-      }else if(r3 == "9"){
+      }else if(r3 == "1"){
         r3 = "0"
+      }else if(r3 == "3"){
+        r3 = "1"
       }
 
-      if (r4 == "11"){
+      if (r4 == "2"){
         r4 = "x"
-      }else if(r4 == "10"){
-        r4 = "1"
-      }else if(r4 == "12"){
+      }else if(r4 == "1"){
         r4 = "0"
+      }else if(r4 == "3"){
+        r4 = "1"
       }
 
-      if (r5 == "14"){
+      if (r5 == "2"){
         r5 = "x"
-      }else if(r5 == "13"){
-        r5 = "1"
-      }else if(r5 == "15"){
+      }else if(r5 == "1"){
         r5 = "0"
+      }else if(r5 == "3"){
+        r5 = "1"
       }
 
-      if (r6 == "17"){
+      if (r6 == "2"){
         r6 = "x"
-      }else if(r6 == "16"){
-        r6 = "1"
-      }else if(r6 == "18"){
+      }else if(r6 == "1"){
         r6 = "0"
+      }else if(r6 == "3"){
+        r6 = "1"
       }
 
-      if (r7 == "20"){
+      if (r7 == "2"){
         r7 = "x"
-      }else if(r7 == "19"){
-        r7 = "1"
-      }else if(r7 == "21"){
+      }else if(r7 == "1"){
         r7 = "0"
+      }else if(r7 == "3"){
+        r7 = "1"
       }
+
       r1_arr.push(r1)
       r2_arr.push(r2)
       r3_arr.push(r3)
@@ -221,4 +280,6 @@
       }
     });
   })
+
 </script>
+

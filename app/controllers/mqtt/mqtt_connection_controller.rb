@@ -1,7 +1,8 @@
 class Mqtt::MqttConnectionController < ApplicationController
 	before_action :mqtt_params
 	def connect
-    mqtt_client = SinapseMQTTClientSingleton.instance
+    	mqtt_client = SinapseMQTTClientSingleton.instance
+		@devices = Device.where(user_id: current_user.id)
 		mqtt_client.host = params[:mqtt][:url].to_s
 		mqtt_client.port = params[:mqtt][:port].to_i
 		mqtt_client.username = params[:mqtt][:username].to_s
@@ -20,15 +21,16 @@ class Mqtt::MqttConnectionController < ApplicationController
 		subscribe_topic
 		publish_message
 		respond_to do |format|
-      format.js {}
-    end
+	      format.js {}
+	    end
 	end
 
 	def disconnect
 		mqtt_client = SinapseMQTTClientSingleton.instance
+		@devices = Device.where(user_id: current_user.id)
 		if mqtt_client.connected?
 			mqtt_client.disconnect
-			SubscribeTopic.where(user_id: current_user.id).delete_all
+			# SubscribeTopic.where(user_id: current_user.id).delete_all
 			json_data = {"status" => "200", "message" => "you are disconnected to the mqtt_client"}
 		else
 			json_data = {"status" => "404", "message" => "not connected with any mqtt_client"}
@@ -36,8 +38,8 @@ class Mqtt::MqttConnectionController < ApplicationController
 		subscribe_topic
 		publish_message
 		respond_to do |format|
-      format.js {}
-    end
+	      format.js {}
+	    end
 	end
 
 	def publishing
@@ -80,7 +82,7 @@ class Mqtt::MqttConnectionController < ApplicationController
 			  measurement_topic = topic+"/CMC/MEASUREMENTS"
 			  alert_topic = topic+"/CMC/ALERTS"
 			  debug_topic = topic+"/CMC/DEBUG"
-			  SubscribeTopic.create(topic:periodic_topic,user_id:current_user.id)
+			  SubscribeTopic.create(periodic_topic:periodic_topic, measurement_topic:measurement_topic, alert_topic:alert_topic, debug_topic:debug_topic, user_id:current_user.id)
 		  	mqtt_client.subscribe(periodic_topic)
 		  	mqtt_client.subscribe(measurement_topic)
 		  	mqtt_client.subscribe(alert_topic)
@@ -126,21 +128,34 @@ class Mqtt::MqttConnectionController < ApplicationController
 	end
 
 	def publish_actuator_message
+		
 		mqtt_client = SinapseMQTTClientSingleton.instance
 		message_data = params[:data].each_slice(10).to_a
 		flag = false
 		message_data.each do |msg|
-			topic = "TEST_CMSR"+"/CMC/ACT/"+msg[8]
+			topic = "TEST_CMSR"+"/CMC/ACT/"+msg[9]
 			message = "11;ACT"+msg[0]+";""ACT"+msg[1]+";""ACT"+msg[2]+";""ACT"+msg[3]+";""ACT"+msg[4]+";""ACT"+msg[5]+";""ACT"+msg[6]+";TRUE"
+			
 			if mqtt_client.connected?
 				#mqtt_client.publish(topic, message)
-			  PublishActuator.create(topic:topic,message:message,user_id: current_user.id)
-			  mqtt_client.publish(topic, message)
+				device = Device.where(id_code: msg[8])
+				
+				if ( device[0].r1 != msg[0] || device[0].r2 != msg[1] || device[0].r3 != msg[2] || device[0].r4 != msg[3] || device[0].r5 != msg[4] || device[0].r6 != msg[5] || device[0].r7 != msg[6])
+			  		
+			  		PublishActuator.create(topic:topic,message:message,user_id: current_user.id)
+
+					device[0].update(r1: msg[0],r2: msg[1],r3: msg[2],r4: msg[3],r5: msg[4],r6: msg[5],r7: msg[6])
+
+
+					mqtt_client.publish(topic, message)
+				else
+
+				end	
 			else
 				flag = true
 			end
 		end
-		@actuator_publish_message = PublishActuator.where(user_id: current_user.id)
+		@actuator_publish_message = PublishActuator.where(user_id: current_user.id).order(created_at: :desc)
 		if flag == false
 			@notice = "Message send successfully"
 			respond_to do |format|
