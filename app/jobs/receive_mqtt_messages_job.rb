@@ -2,7 +2,7 @@ class ReceiveMqttMessagesJob < ActiveJob::Base
   include SuckerPunch::Job
   self.queue_adapter = :sucker_punch
 
-  def perform()
+  def perform(current_user)
     mqtt_client = SinapseMQTTClientSingleton.instance
 
     if mqtt_client.connected? then

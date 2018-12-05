@@ -10,7 +10,6 @@ class Mqtt::MqttConnectionController < ApplicationController
 		mqtt_client.installation_id = "DEMOSTRADOR"
 		mqtt_client.ssl = false
 		mqtt_client.keep_alive = 3600
-		@last_messages = OperationData.where(user_id: current_user.id).order(created_at: :desc).limit(10)
 
 
 		# Connect
@@ -19,6 +18,8 @@ class Mqtt::MqttConnectionController < ApplicationController
 			subscribes = SubscribeTopic.where(user_id: current_user.id)
 			if (subscribes.count > 0) 
 				subscribes.each do |sub|
+					@last_messages = OperationData.where(user_id: current_user.id, created_at: Time.now-20*60..Time.now+20*60).order(created_at: :desc).limit(10)
+				  	ReceiveMqttMessagesJob.new.async.perform(current_user) #kshitiz wanted this here
 					mqtt_client.subscribe(sub.periodic_topic)
 				  	mqtt_client.subscribe(sub.measurement_topic)
 				  	mqtt_client.subscribe(sub.alert_topic)
@@ -76,7 +77,7 @@ class Mqtt::MqttConnectionController < ApplicationController
 	end
 
 	def subscribe
-		@last_messages = OperationData.where(user_id: current_user.id).order(created_at: :desc).limit(10)
+		@last_messages = OperationData.where(user_id: current_user.id, created_at: Time.now-20*60..Time.now+20*60).order(created_at: :desc).limit(10)
 		mqtt_client = SinapseMQTTClientSingleton.instance
 	  topics = []
 	  flag = false
@@ -96,7 +97,7 @@ class Mqtt::MqttConnectionController < ApplicationController
 		  	mqtt_client.subscribe(measurement_topic)
 		  	mqtt_client.subscribe(alert_topic)
 		  	mqtt_client.subscribe(debug_topic)
-			  ReceiveMqttMessagesJob.new.async.perform()
+			  ReceiveMqttMessagesJob.new.async.perform(current_user)
 			  flag = true
 			end
 			publish_message
