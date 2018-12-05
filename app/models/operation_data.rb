@@ -38,5 +38,7 @@ class OperationData
   field :ES2, type: Float
   field :ES3, type: Float
   field :F, type: Float
+  field :user_id, type: Integer
+  field :topic, type: String
   field :TIMESTAMP, type: Time
 end

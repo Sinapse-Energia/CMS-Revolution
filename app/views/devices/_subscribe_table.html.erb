@@ -1,3 +1,4 @@
+
 <%@mqtt_client = SinapseMQTTClientSingleton.instance%>
 <%if @notice == "Topic Have been Subscribed"%>
   <p class="alert alert-success notice"><%=@notice%></p>
@@ -34,7 +35,7 @@
 </table>
 
 <br><br>
-<hr style="height:1px;border:none;color:#333;background-color:#333;margin-top: 11px;">
+<!-- <hr style="height:1px;border:none;color:#333;background-color:#333;margin-top: 11px;">
 <center><h2><b>Last messages received</b></h2></center>
 <hr style="height:1px;border:none;color:#333;background-color:#333;">
 <br><br>
@@ -55,8 +56,42 @@
       </tr>
     <% end %>
   </tbody>
-</table>
+</table> -->
 
+<hr style="height:1px;border:none;color:#333;background-color:#333;">
+<center><h2><b>Last messages</b></h2></center>
+<hr style="height:1px;border:none;color:#333;background-color:#333;">
+<br><br>
+
+<div class="table-overflow">
+  <table id= "table-data" class="table table-condensed table-striped table-bordered nowrap" width="100%">
+    <thead>
+      <tr>
+        <th>Topic</th>
+        <th>Message</th>
+        <th>Time</th>
+
+      </tr>
+    </thead>
+    <tbody style="height:100px;">
+      <% if @mqtt_client.connected? %>
+        <% last_messages.each_with_index do |message,i| %>
+          <tr>
+            <td><%=message.topic%></td>
+            <td><%= "#{message.I1}" "#{message.I2}" "#{message.I3}" "#{message.IN}" "#{message.U12}" "#{message.U23}" "#{message.U32}" "#{message.V1N}" "#{message.V2N}" "#{message.V3N}" "#{message.P1}" "#{message.P2}" "#{message.P3}" "#{message.Q1}" "#{message.Q2}" "#{message.Q3}" "#{message.S1}" "#{message.S2}" "#{message.S3}" "#{message.FDP1}" "#{message.FDP2}" "#{message.FDP3}" "#{message.FDPS1}" "#{message.FDPS2}" "#{message.FDPS3}" "#{message.EP1}" "#{message.EP2}" "#{message.EP3}" "#{message.EQ1}" "#{message.EQ2}" "#{message.EQ3}" "#{message.ES1}" "#{message.ES2}" "#{message.ES3}" "#{message.F}" %></td>
+            <td><%=message.TIMESTAMP%></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<style type="text/css">
+  .table-overflow{
+    overflow-x: scroll;
+  }
+</style>
 
 
 <script type="text/javascript">

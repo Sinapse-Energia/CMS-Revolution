@@ -29,7 +29,7 @@
           <hr style="height:2px;border:none;color:#333;background-color:#333;">
           <br><br>
           <div class="subscribe_message_board">
-            <%= render partial: 'devices/subscribe_table', locals: {publish_message: @publish_message, subscribe_topic: @subscribe_topic} %>
+            <%= render partial: 'devices/subscribe_table', locals: {publish_message: @publish_message, subscribe_topic: @subscribe_topic, last_messages: @last_messages} %>
           </div>
         </div>
       </div>
