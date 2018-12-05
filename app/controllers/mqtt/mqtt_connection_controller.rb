@@ -76,6 +76,7 @@ class Mqtt::MqttConnectionController < ApplicationController
 	end
 
 	def subscribe
+		@last_messages = OperationData.where(user_id: current_user.id).order(created_at: :desc).limit(10)
 		mqtt_client = SinapseMQTTClientSingleton.instance
 	  topics = []
 	  flag = false
